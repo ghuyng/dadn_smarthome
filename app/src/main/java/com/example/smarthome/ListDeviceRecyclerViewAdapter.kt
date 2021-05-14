@@ -1,5 +1,6 @@
 package com.example.smarthome
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +15,7 @@ class ListDeviceRecyclerViewAdapter(private val deviceList : List<Device>): Recy
         var button: Button = view.findViewById(R.id.device_btn)
         init {
             button.setOnClickListener { v: View ->
-
+                val intent = Intent(v.context, ViewDeviceActivity::class.java)
             }
         }
     }

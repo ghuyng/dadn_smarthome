@@ -6,4 +6,5 @@
     <string name="doors">Doors</string>
     <string name="front_door">Front Door</string>
     <string name="back_door">Back Door</string>
+    <string name="status">Status:</string>
 </resources>

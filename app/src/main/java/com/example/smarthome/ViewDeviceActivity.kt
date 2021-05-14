@@ -1,4 +1,4 @@
-    package com.example.smarthome
+package com.example.smarthome
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
