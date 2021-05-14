@@ -8,11 +8,16 @@ import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class DeviceViewHolder(view: View): RecyclerView.ViewHolder(view){
-    var button: Button = view.findViewById(R.id.device_btn)
-}
 
-class ListDeviceRecyclerViewAdapter(private val deviceList : List<Device>): RecyclerView.Adapter<DeviceViewHolder>() {
+class ListDeviceRecyclerViewAdapter(private val deviceList : List<Device>): RecyclerView.Adapter<ListDeviceRecyclerViewAdapter.DeviceViewHolder>() {
+    inner class DeviceViewHolder(view: View): RecyclerView.ViewHolder(view){
+        var button: Button = view.findViewById(R.id.device_btn)
+        init {
+            button.setOnClickListener { v: View ->
+
+            }
+        }
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_device_layout, parent, false)
         return DeviceViewHolder(view)
@@ -44,7 +49,7 @@ class ListRoomRecyclerViewAdapter(private val roomList : List<Room>): RecyclerVi
         }
     }
 
-    public fun viewDeviceList(room: Room, view: View){
+     fun viewDeviceList(room: Room, view: View){
         val deviceList = room.getDevices()
         val deviceAdapter = ListDeviceRecyclerViewAdapter(deviceList)
         val root = view.rootView
