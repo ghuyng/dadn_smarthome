@@ -1,7 +1,7 @@
 package com.example.smarthome
 
-class Device (private val name: String, private val room: String) {
-    public fun getName(): String{
-        return this.name
-    }
+import java.io.Serializable
+
+class Device (var name: String, var room: String): Serializable {
+    var status: Boolean = true
 }

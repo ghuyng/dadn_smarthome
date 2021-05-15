@@ -8,7 +8,7 @@
 
 
     <ImageView
-        android:id="@+id/powerRingImage"
+        android:id="@+id/power_ring_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
@@ -18,7 +18,7 @@
         app:srcCompat="@drawable/ellipse_2" />
 
     <TextView
-        android:id="@+id/roomText"
+        android:id="@+id/device_room"
         android:layout_width="166dp"
         android:layout_height="57dp"
         android:layout_marginTop="20dp"
@@ -32,30 +32,30 @@
         tools:text="Room Name" />
 
     <ImageView
-        android:id="@+id/deviceImage"
+        android:id="@+id/device_image"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/roomText"
+        app:layout_constraintTop_toBottomOf="@+id/device_room"
         app:srcCompat="@drawable/ic_placeholder"
         android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"/>
 
     <TextView
-        android:id="@+id/deviceName"
+        android:id="@+id/device_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="Device Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/deviceImage"
+        app:layout_constraintTop_toBottomOf="@+id/device_image"
         android:layout_marginTop="20dp"
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/statusText"
+        android:id="@+id/status_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
@@ -63,10 +63,10 @@
         android:text="@string/status"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/deviceName" />
+        app:layout_constraintTop_toBottomOf="@+id/device_name" />
 
     <TextView
-        android:id="@+id/deviceStatus"
+        android:id="@+id/device_status"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginEnd="100dp"
@@ -74,52 +74,52 @@
         android:gravity="center"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/statusText"
+        app:layout_constraintBottom_toBottomOf="@+id/status_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/statusText"
+        app:layout_constraintTop_toTopOf="@+id/status_text"
         tools:text="On" />
 
     <ImageButton
-        android:id="@+id/backButton"
+        android:id="@+id/back_button"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:background="@android:color/transparent"
-        app:layout_constraintBottom_toBottomOf="@+id/roomText"
-        app:layout_constraintEnd_toStartOf="@+id/roomText"
+        app:layout_constraintBottom_toBottomOf="@+id/device_room"
+        app:layout_constraintEnd_toStartOf="@+id/device_room"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/roomText"
+        app:layout_constraintTop_toTopOf="@+id/device_room"
         app:srcCompat="@drawable/ic_backbtn" />
 
     <ImageButton
-        android:id="@+id/settingButton"
+        android:id="@+id/setting_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        app:layout_constraintBottom_toBottomOf="@+id/roomText"
+        app:layout_constraintBottom_toBottomOf="@+id/device_room"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/roomText"
-        app:layout_constraintTop_toTopOf="@+id/roomText"
+        app:layout_constraintStart_toEndOf="@+id/device_room"
+        app:layout_constraintTop_toTopOf="@+id/device_room"
         app:srcCompat="@drawable/ic_settings" />
 
     <ImageButton
-        android:id="@+id/powerButton"
+        android:id="@+id/power_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        app:layout_constraintBottom_toBottomOf="@+id/powerRingImage"
-        app:layout_constraintEnd_toEndOf="@+id/powerRingImage"
-        app:layout_constraintStart_toStartOf="@+id/powerRingImage"
-        app:layout_constraintTop_toTopOf="@+id/powerRingImage"
+        app:layout_constraintBottom_toBottomOf="@+id/power_ring_image"
+        app:layout_constraintEnd_toEndOf="@+id/power_ring_image"
+        app:layout_constraintStart_toStartOf="@+id/power_ring_image"
+        app:layout_constraintTop_toTopOf="@+id/power_ring_image"
         app:srcCompat="@drawable/ellipse_3" />
 
     <ImageButton
-        android:id="@+id/powerIconButton"
+        android:id="@+id/power_icon_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        app:layout_constraintBottom_toBottomOf="@+id/powerButton"
-        app:layout_constraintEnd_toEndOf="@+id/powerButton"
-        app:layout_constraintStart_toStartOf="@+id/powerButton"
-        app:layout_constraintTop_toTopOf="@+id/powerButton"
+        app:layout_constraintBottom_toBottomOf="@+id/power_button"
+        app:layout_constraintEnd_toEndOf="@+id/power_button"
+        app:layout_constraintStart_toStartOf="@+id/power_button"
+        app:layout_constraintTop_toTopOf="@+id/power_button"
         app:srcCompat="@drawable/ic_power" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,7 +17,7 @@ class ListDeviceRecyclerViewAdapter(private val deviceList : List<Device>): Recy
             button.setOnClickListener { v: View ->
                 val intent = Intent(v.context, ViewDeviceActivity::class.java)
                 val device = deviceList[adapterPosition]
-                intent.putExtra("deviceName", device.getName())
+                intent.putExtra("device", device)
                 v.context.startActivity(intent)
             }
         }
@@ -28,7 +28,7 @@ class ListDeviceRecyclerViewAdapter(private val deviceList : List<Device>): Recy
     }
 
     override fun onBindViewHolder(holder: DeviceViewHolder, position: Int) {
-        holder.button.setText(deviceList[position].getName())
+        holder.button.setText(deviceList[position].name)
     }
 
     override fun getItemCount(): Int {
