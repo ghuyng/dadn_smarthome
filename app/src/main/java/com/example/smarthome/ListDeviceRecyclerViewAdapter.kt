@@ -16,6 +16,7 @@ class ListDeviceRecyclerViewAdapter(private val deviceList : List<Device>): Recy
         init {
             button.setOnClickListener { v: View ->
                 val intent = Intent(v.context, ViewDeviceActivity::class.java)
+                v.context.startActivity(intent)
             }
         }
     }
