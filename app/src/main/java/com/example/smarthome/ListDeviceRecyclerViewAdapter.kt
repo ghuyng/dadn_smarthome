@@ -43,7 +43,7 @@ class ListRoomRecyclerViewAdapter(private val roomList : List<Room>): RecyclerVi
     inner class RoomViewHolder(view: View): RecyclerView.ViewHolder(view){
         var title: TextView = view.findViewById(R.id.room_name)
         init {
-            title.setOnClickListener {v: View ->
+            title.setOnClickListener {
                 val position: Int = adapterPosition
                 viewDeviceList(roomList[position], view)
                 lastCheckedTitle?.isSelected = false
