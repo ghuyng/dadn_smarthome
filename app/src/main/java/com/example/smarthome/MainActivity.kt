@@ -1,6 +1,8 @@
 package com.example.smarthome
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -15,7 +17,12 @@ import org.eclipse.paho.client.mqttv3.MqttMessage
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var mqttService: MQTTService
+    companion object {
+        @SuppressLint("StaticFieldLeak")
+        lateinit var mqttService: MQTTService
+        var roomList: List<Room> = listOf(Room("Living Room"), Room("Kitchen"),
+            Room("BedRoom"), Room("Bath Room"), Room("Garage"))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +52,7 @@ class MainActivity : AppCompatActivity() {
             override fun messageArrived(topic: String?, message: MqttMessage?) {
                 val data_to_microbit = message.toString()
 //                port.write(data_to_microbit.toByteArray(), 1000)
+                Toast.makeText(applicationContext, data_to_microbit, Toast.LENGTH_SHORT).show()
             }
 
             override fun deliveryComplete(token: IMqttDeliveryToken?) {
@@ -56,7 +64,6 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
-//        mqttService.sendDataMQTT("hello")
     }
 
 }

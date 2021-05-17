@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Smart Home</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_dashboard">Devices</string>
     <string name="title_notifications">Notifications</string>
     <string name="doors">Doors</string>
     <string name="front_door">Front Door</string>

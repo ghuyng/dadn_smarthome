@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.smarthome.ListRoomRecyclerViewAdapter
-import com.example.smarthome.Room
+import com.example.smarthome.MainActivity
 import com.example.smarthome.databinding.FragmentDashboardBinding
 
 class DashboardFragment : Fragment() {
@@ -21,9 +21,7 @@ class DashboardFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    var rlist: List<Room> = listOf(Room("Living Room"), Room("Kitchen"),
-        Room("BedRoom"), Room("Bath Room"), Room("Garage"))
-    private val roomAdapter = ListRoomRecyclerViewAdapter(rlist)
+    private lateinit var roomAdapter: ListRoomRecyclerViewAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,6 +31,7 @@ class DashboardFragment : Fragment() {
         dashboardViewModel =
             ViewModelProvider(this).get(DashboardViewModel::class.java)
 
+        roomAdapter = ListRoomRecyclerViewAdapter(MainActivity.roomList)
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -45,7 +44,7 @@ class DashboardFragment : Fragment() {
         roomRecyclerView.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
         roomRecyclerView.adapter = roomAdapter
         println(roomRecyclerView.findViewHolderForAdapterPosition(0))
-        roomAdapter.viewDeviceList(rlist[0], root)
+        roomAdapter.viewDeviceList(MainActivity.roomList[0], root)
 
         return root
     }

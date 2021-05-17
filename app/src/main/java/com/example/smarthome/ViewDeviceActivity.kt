@@ -3,11 +3,8 @@ package com.example.smarthome
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken
-import org.eclipse.paho.client.mqttv3.MqttCallbackExtended
-import org.eclipse.paho.client.mqttv3.MqttMessage
+import org.json.JSONObject
 
 class ViewDeviceActivity : AppCompatActivity() {
 
@@ -21,31 +18,10 @@ class ViewDeviceActivity : AppCompatActivity() {
         findViewById<ImageButton>(R.id.power_icon_button).setOnClickListener { changeDeviceStatus()}
 
         val device = intent.getSerializableExtra("device") as Device
+        mqttService = MainActivity.mqttService
         findViewById<TextView>(R.id.device_room).text = device.room
         findViewById<TextView>(R.id.device_name).text = device.name
         findViewById<TextView>(R.id.device_status).text = if (device.status) "ON" else "OFF"
-
-        mqttService = MQTTService(this.applicationContext)
-        mqttService.setCallback(object: MqttCallbackExtended {
-            override fun connectionLost(cause: Throwable?) {
-
-            }
-
-            override fun messageArrived(topic: String?, message: MqttMessage?) {
-                val data_to_microbit = message.toString()
-                Toast.makeText(applicationContext, data_to_microbit, Toast.LENGTH_SHORT).show()
-//                port.write(data_to_microbit.toByteArray(), 1000)
-            }
-
-            override fun deliveryComplete(token: IMqttDeliveryToken?) {
-
-            }
-
-            override fun connectComplete(reconnect: Boolean, serverURI: String?) {
-
-            }
-
-        })
     }
 
     private fun changeDeviceStatus(){
@@ -53,6 +29,15 @@ class ViewDeviceActivity : AppCompatActivity() {
         device.status = !device.status
         val statusStr: String = if (device.status) "ON" else "OFF"
         findViewById<TextView>(R.id.device_status).text = statusStr
-        mqttService.sendDataMQTT("hello")
+        mqttService.sendDataMQTT(makeMessage(device, (if (device.status) 1 else 0).toString()).toString())
+    }
+
+    private fun makeMessage(device: Device, data: String): JSONObject{
+        val message = JSONObject()
+        message.put("id", "11")
+        message.put("data", data)
+        message.put("unit", "")
+        message.put("name", "RELAY")
+        return message
     }
 }

@@ -28,7 +28,7 @@ class ListDeviceRecyclerViewAdapter(private val deviceList : List<Device>): Recy
     }
 
     override fun onBindViewHolder(holder: DeviceViewHolder, position: Int) {
-        holder.button.setText(deviceList[position].name)
+        holder.button.text = deviceList[position].name
     }
 
     override fun getItemCount(): Int {

@@ -6,13 +6,13 @@ import org.eclipse.paho.android.service.MqttAndroidClient
 import org.eclipse.paho.client.mqttv3.*
 import java.nio.charset.Charset
 
-class MQTTService(val context: Context) {
+class MQTTService(private val context: Context){
 
     final val serverUri = "tcp://io.adafruit.com:1883"
     final val clientId = MqttClient.generateClientId()
     final val subscriptionTopic = "ghuyng/feeds/my-item"
     final val username = "ghuyng"
-    final val password = "aio_WUEr64jS09tsCJBkE0CsbmpxYR0z"
+    final val password = "aio_thba95RRI8smeEXs5K7EpurrH7qN"
 
 
     val mqttAndroidClient: MqttAndroidClient = MqttAndroidClient(context, serverUri, clientId)
