@@ -17,11 +17,14 @@ import org.eclipse.paho.client.mqttv3.MqttMessage
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+
     companion object {
         @SuppressLint("StaticFieldLeak")
         lateinit var mqttService: MQTTService
-        var roomList: List<Room> = listOf(Room("Living Room"), Room("Kitchen"),
-            Room("BedRoom"), Room("Bath Room"), Room("Garage"))
+        var roomList: List<Room> = listOf(
+            Room("Living Room"), Room("Kitchen"),
+            Room("BedRoom"), Room("Bath Room"), Room("Garage")
+        )
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,10 +47,8 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         mqttService = MQTTService(this.applicationContext)
-        mqttService.setCallback(object: MqttCallbackExtended{
-            override fun connectionLost(cause: Throwable?) {
-
-            }
+        mqttService.setCallback(object : MqttCallbackExtended {
+            override fun connectionLost(cause: Throwable?) {}
 
             override fun messageArrived(topic: String?, message: MqttMessage?) {
                 val data_to_microbit = message.toString()
@@ -55,15 +56,12 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, data_to_microbit, Toast.LENGTH_SHORT).show()
             }
 
-            override fun deliveryComplete(token: IMqttDeliveryToken?) {
+            override fun deliveryComplete(token: IMqttDeliveryToken?) {}
 
-            }
-
-            override fun connectComplete(reconnect: Boolean, serverURI: String?) {
-
-            }
+            override fun connectComplete(reconnect: Boolean, serverURI: String?) {}
 
         })
+
     }
 
 }

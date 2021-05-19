@@ -9,6 +9,7 @@ import org.json.JSONObject
 class ViewDeviceActivity : AppCompatActivity() {
 
     private lateinit var mqttService: MQTTService
+    private var apiController = APIController(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_device)
@@ -29,7 +30,17 @@ class ViewDeviceActivity : AppCompatActivity() {
         device.status = !device.status
         val statusStr: String = if (device.status) "ON" else "OFF"
         findViewById<TextView>(R.id.device_status).text = statusStr
-        mqttService.sendDataMQTT(makeMessage(device, (if (device.status) 1 else 0).toString()).toString())
+//        mqttService.sendDataMQTT(makeMessage(device, (if (device.status) 1 else 0).toString()).toString())
+
+        apiController.jsonObjectGET("/"){ res ->
+            println(res.toString())
+        }
+
+        apiController.jsonObjectPOST("/turn-device", makeMessage(device,
+            (if (device.status) 1 else 0).toString())){ res ->
+            println(res.toString())
+        }
+
     }
 
     private fun makeMessage(device: Device, data: String): JSONObject{
