@@ -2,6 +2,7 @@ package com.example.smarthome
 
 import android.os.Bundle
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import org.json.JSONObject
@@ -22,6 +23,7 @@ class ViewDeviceActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.device_room).text = device.room
         findViewById<TextView>(R.id.device_name).text = device.name
         findViewById<TextView>(R.id.device_status).text = if (device.status) "ON" else "OFF"
+        findViewById<ImageView>(R.id.device_image).setImageDrawable(Ultility(this).getDeviceImage(device))
     }
 
     private fun changeDeviceStatus(){

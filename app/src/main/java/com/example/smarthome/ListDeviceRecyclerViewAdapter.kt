@@ -28,7 +28,11 @@ class ListDeviceRecyclerViewAdapter(private val deviceList : List<Device>): Recy
     }
 
     override fun onBindViewHolder(holder: DeviceViewHolder, position: Int) {
-        holder.button.text = deviceList[position].name
+        val device = deviceList[position]
+        val img = Ultility(holder.itemView.context).getDeviceIcon(device)
+        img?.setBounds(0, 5, 175, 175)
+        holder.button.text = device.name
+        holder.button.setCompoundDrawables(null, img, null, null)
     }
 
     override fun getItemCount(): Int {
@@ -40,6 +44,7 @@ class ListDeviceRecyclerViewAdapter(private val deviceList : List<Device>): Recy
 
 class ListRoomRecyclerViewAdapter(private val roomList : List<Room>): RecyclerView.Adapter<ListRoomRecyclerViewAdapter.RoomViewHolder>() {
     private var lastCheckedTitle: TextView? = null
+    var lastCheckedPos = 0
     inner class RoomViewHolder(view: View): RecyclerView.ViewHolder(view){
         var title: TextView = view.findViewById(R.id.room_name)
         init {
@@ -48,19 +53,20 @@ class ListRoomRecyclerViewAdapter(private val roomList : List<Room>): RecyclerVi
                 viewDeviceList(roomList[position], view)
                 lastCheckedTitle?.isSelected = false
                 lastCheckedTitle = title
+                lastCheckedPos = position
                 title.isSelected = true
             }
         }
     }
 
      fun viewDeviceList(room: Room, view: View){
-        val deviceList = room.getDevices()
-        val deviceAdapter = ListDeviceRecyclerViewAdapter(deviceList)
-        val root = view.rootView
-        val deviceRecyclerView: RecyclerView = root.findViewById(R.id.recycler_view_device)
-        deviceRecyclerView.layoutManager = GridLayoutManager(root.context, 2)
-        deviceRecyclerView.adapter = deviceAdapter
-    }
+         val deviceList = room.getDevices()
+         val deviceAdapter = ListDeviceRecyclerViewAdapter(deviceList)
+         val root = view.rootView
+         val deviceRecyclerView: RecyclerView = root.findViewById(R.id.recycler_view_device)
+         deviceRecyclerView.layoutManager = GridLayoutManager(root.context, 2)
+         deviceRecyclerView.adapter = deviceAdapter
+     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_room_layout, parent, false)
@@ -72,6 +78,7 @@ class ListRoomRecyclerViewAdapter(private val roomList : List<Room>): RecyclerVi
         if (position == 0 && lastCheckedTitle == null) {
             holder.title.isSelected = true
             lastCheckedTitle = holder.title
+            lastCheckedPos = 0
         }
     }
 
