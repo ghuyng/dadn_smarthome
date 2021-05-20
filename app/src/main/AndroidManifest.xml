@@ -10,6 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartHome">
         <activity
+            android:name=".SignUpActivity"
+            android:label="@string/title_activity_sign_up"
+            android:theme="@style/Theme.SmartHome.NoActionBar"></activity>
+        <activity
             android:name=".MainActivity"
             android:label="@string/app_name">
             <intent-filter>
