@@ -3,11 +3,9 @@ package com.example.smarthome
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-class ReportActivity : AppCompatActivity() {
+class DevicereportActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_report)
-        
-
+        setContentView(R.layout.activity_devicereport)
     }
 }
