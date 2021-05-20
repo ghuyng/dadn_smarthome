@@ -1,12 +1,16 @@
 package com.example.smarthome
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.ImageButton
+import android.widget.PopupMenu
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import org.json.JSONObject
 
-class ViewDeviceActivity : AppCompatActivity() {
+class ViewDeviceActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
 
     private lateinit var mqttService: MQTTService
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,6 +20,7 @@ class ViewDeviceActivity : AppCompatActivity() {
         findViewById<ImageButton>(R.id.back_button).setOnClickListener { onBackPressed() }
         findViewById<ImageButton>(R.id.power_button).setOnClickListener { changeDeviceStatus()}
         findViewById<ImageButton>(R.id.power_icon_button).setOnClickListener { changeDeviceStatus()}
+        findViewById<ImageButton>(R.id.setting_button).setOnClickListener{ showDeviceSettingPopup() }
 
         val device = intent.getSerializableExtra("device") as Device
         mqttService = MainActivity.mqttService
@@ -40,4 +45,32 @@ class ViewDeviceActivity : AppCompatActivity() {
         message.put("name", "RELAY")
         return message
     }
+
+
+    private fun showDeviceSettingPopup(){
+        val button = findViewById<ImageButton>(R.id.setting_button)
+        val popup = PopupMenu(this, button)
+        popup.setOnMenuItemClickListener(this)
+        popup.inflate(R.menu.setting_devide_popup_menu)
+        popup.show()
+    }
+
+    override fun onMenuItemClick(item: MenuItem): Boolean {
+        return when (item.itemId){
+            R.id.option_set_power_schedule -> {
+                val i = Intent(this, SetTurnOnOffTimeActivity::class.java)
+                startActivity(i)
+                finish()
+//                Toast.makeText(this, ,"Set power selected", Toast.LENGTH_SHORT).show()
+                true
+            }
+
+            R.id.option_set_auto_mode -> {
+                Toast.makeText(this, "Set auto mode selected", Toast.LENGTH_SHORT).show()
+                true
+            }
+            else -> false
+        }
+    }
+
 }
