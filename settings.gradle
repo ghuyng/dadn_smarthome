@@ -1,7 +1,2 @@
-<<<<<<< HEAD
 rootProject.name = "Smart Home"
 include ':app'
-=======
-rootProject.name = "Smart Home"
-include ':app'
->>>>>>> hung_branch

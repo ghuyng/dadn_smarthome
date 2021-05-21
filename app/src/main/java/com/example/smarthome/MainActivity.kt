@@ -1,6 +1,8 @@
 package com.example.smarthome
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -25,8 +27,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
+        val intent = Intent(this, SignInActivity::class.java)
+        startActivityForResult(intent, 123)
+
+        super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -64,6 +69,19 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 123) {
+            if(resultCode == Activity.RESULT_OK){
+                val result = data?.getStringExtra("UserEmail");
+                Toast.makeText(this, "Welcome ${result.toString()}", Toast.LENGTH_SHORT).show()
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                finish()
+            }
+        }
     }
 
 }

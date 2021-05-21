@@ -1,18 +1,13 @@
 package com.example.smarthome
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Button
-import android.content.Intent
-import android.widget.TextView
 import android.widget.EditText
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import com.example.smarthome.databinding.ActivityAuthenticateBinding
 
 class SignInActivity : AppCompatActivity() {
@@ -30,18 +25,19 @@ class SignInActivity : AppCompatActivity() {
         val textViewSignUp: TextView = findViewById(R.id.signUpTextView)
         buttonSignIn.setOnClickListener {
             Log.d("SignIn", "onClick: called")
-            val intent = Intent(contxt, MainActivity::class.java)
+            val intent = Intent()
             Log.d("SignIn", "Email: ${user_email.text.toString()}")
             Log.d("SignIn", "Password: ${user_password.text.toString()}")
 
-            intent.putExtra("UserEmail", user_email.toString())
-            intent.putExtra("UserPassword", user_password.toString())
-            startActivity(intent)
+            intent.putExtra("UserEmail", user_email.text.toString())
+            intent.putExtra("UserPassword", user_password.text.toString())
+            setResult(Activity.RESULT_OK, intent)
+            finish()
         }
         textViewSignUp.setOnClickListener {
             Log.d("SignUp", "onClick: called")
             val intent = Intent(contxt, SignUpActivity::class.java)
-            startActivity(intent)
+            startActivityForResult(intent, 200)
         }
     }
 }

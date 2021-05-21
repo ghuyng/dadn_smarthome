@@ -38,12 +38,14 @@ class SignUpActivity : AppCompatActivity() {
             intent.putExtra("NewUserEmail", user_email.toString())
             intent.putExtra("NewUserPassword", user_password.toString())
             intent.putExtra("NewUserPasswordRetype", user_passwordRe.toString())
-            // startActivity(intent)
+//            startActivity(intent)
+            finish()
         }
         buttonBack.setOnClickListener {
             Log.d("SignUpBack", "onClick: called")
-            val intent = Intent(contxt, SignInActivity::class.java)
-            startActivity(intent)
+//            val intent = Intent(contxt, SignInActivity::class.java)
+//            startActivity(intent)
+            finish()
         }
     }
 }

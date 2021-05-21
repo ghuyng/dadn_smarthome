@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <resources>
     <string name="app_name">Smart Home</string>
     <string name="title_home">Home</string>
@@ -9,13 +8,5 @@
     <string name="back_door">Back Door</string>
     <string name="status">Status:</string>
     <string name="auto_mode">Auto mode:</string>
-=======
-<resources>
-    <string name="app_name">Smart Home</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
     <string name="title_activity_sign_up">SignUpActivity</string>
-    <!-- Strings used for fragments for navigation -->
->>>>>>> hung_branch
 </resources>
