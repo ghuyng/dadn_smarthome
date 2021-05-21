@@ -28,24 +28,20 @@ class SignInActivity : AppCompatActivity() {
         val user_password: EditText = findViewById(R.id.editTextTextPassword)
         val buttonSignIn: Button = findViewById(R.id.button_sign_in)
         val textViewSignUp: TextView = findViewById(R.id.signUpTextView)
-        buttonSignIn.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(p0: View?) {
-                Log.d("SignIn", "onClick: called")
-                val intent = Intent(contxt, SignUpActivity::class.java)
-                Log.d("SignIn", "Email: ${user_email.text.toString()}")
-                Log.d("SignIn", "Password: ${user_password.text.toString()}")
+        buttonSignIn.setOnClickListener {
+            Log.d("SignIn", "onClick: called")
+            val intent = Intent(contxt, MainActivity::class.java)
+            Log.d("SignIn", "Email: ${user_email.text.toString()}")
+            Log.d("SignIn", "Password: ${user_password.text.toString()}")
 
-                intent.putExtra("UserEmail",user_email.toString())
-                intent.putExtra("UserPassword",user_password.toString())
-                // startActivity(intent)
-            }
-        })
-        textViewSignUp.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(p0: View?) {
-                Log.d("SignUp", "onClick: called")
-                val intent = Intent(contxt, SignUpActivity::class.java)
-                startActivity(intent)
-            }
-        })
+            intent.putExtra("UserEmail", user_email.toString())
+            intent.putExtra("UserPassword", user_password.toString())
+            startActivity(intent)
+        }
+        textViewSignUp.setOnClickListener {
+            Log.d("SignUp", "onClick: called")
+            val intent = Intent(contxt, SignUpActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

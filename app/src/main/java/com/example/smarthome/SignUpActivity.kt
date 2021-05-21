@@ -28,7 +28,7 @@ class SignUpActivity : AppCompatActivity() {
         val user_passwordRe: EditText = findViewById(R.id.textPasswordRetypeSignUp)
         buttonSignUp.setOnClickListener {
             Log.d("SignUp", "onClick: called")
-            val intent = Intent(contxt, SignInActivity::class.java)
+            val intent = Intent(contxt, MainActivity::class.java)
             Log.d("SignUp", "Name: ${user_name.text.toString()}")
             Log.d("SignUp", "Email: ${user_email.text.toString()}")
             Log.d("SignUp", "Password: ${user_password.text.toString()}")
