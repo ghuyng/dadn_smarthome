@@ -7,7 +7,6 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import org.json.JSONObject
 
@@ -62,14 +61,12 @@ class ViewDeviceActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListene
             R.id.option_set_power_schedule -> {
                 val i = Intent(this, SetTurnOnOffTimeActivity::class.java)
                 startActivity(i)
-                finish()
 //                Toast.makeText(this, ,"Set power selected", Toast.LENGTH_SHORT).show()
                 true
             }
             R.id.option_set_auto_mode -> {
                 val i = Intent(this, SetAutoModeActivity::class.java)
                 startActivity(i)
-                finish()
                 true
             }
             else -> false

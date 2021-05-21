@@ -16,7 +16,7 @@
         <activity
             android:name=".SetAutoModeActivity"
             android:parentActivityName=".ViewDeviceActivity"
-            android:theme="@style/Theme.MaterialComponents.NoActionBar"></activity>
+            android:theme="@style/Theme.MaterialComponents.NoActionBar"/>
         <activity
             android:name=".SetTurnOnOffTimeActivity"
             android:parentActivityName=".ViewDeviceActivity"
