@@ -3,7 +3,6 @@ package com.example.smarthome
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
@@ -29,7 +28,7 @@ class SignUpActivity : AppCompatActivity() {
         val user_passwordRe: EditText = findViewById(R.id.textPasswordRetypeSignUp)
         buttonSignUp.setOnClickListener {
             Log.d("SignUp", "onClick: called")
-            val intent = Intent(contxt, MainActivity::class.java)
+            val intent = Intent(contxt, SignInActivity::class.java)
             Log.d("SignUp", "Name: ${user_name.text.toString()}")
             Log.d("SignUp", "Email: ${user_email.text.toString()}")
             Log.d("SignUp", "Password: ${user_password.text.toString()}")
@@ -43,7 +42,7 @@ class SignUpActivity : AppCompatActivity() {
         }
         buttonBack.setOnClickListener {
             Log.d("SignUpBack", "onClick: called")
-            val intent = Intent(contxt, MainActivity::class.java)
+            val intent = Intent(contxt, SignInActivity::class.java)
             startActivity(intent)
         }
     }
