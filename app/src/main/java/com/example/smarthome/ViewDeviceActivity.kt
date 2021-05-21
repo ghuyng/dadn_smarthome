@@ -66,7 +66,9 @@ class ViewDeviceActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListene
             }
 
             R.id.option_set_auto_mode -> {
-                Toast.makeText(this, "Set auto mode selected", Toast.LENGTH_SHORT).show()
+                val i = Intent(this, SetAutoModeActivity::class.java)
+                startActivity(i)
+                finish()
                 true
             }
             else -> false

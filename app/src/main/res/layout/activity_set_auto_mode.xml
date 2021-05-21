@@ -7,13 +7,237 @@
     android:background="#000000"
     tools:context=".SetAutoModeActivity">
 
+
+    <ImageButton
+        android:id="@+id/setting_auto_back_button"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toTopOf="@+id/setting_auto_blank_space"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.443"
+        app:srcCompat="@drawable/ic_backbtn" />
+
+    <TextView
+        android:id="@+id/setting_auto_tv_title"
+        android:layout_width="166dp"
+        android:layout_height="57dp"
+        android:background="@drawable/rectangle"
+        android:gravity="center"
+        android:text="Auto Mode"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/setting_auto_blank_space"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.559"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.417"></TextView>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Automode"
+        android:textColor="#FDA43C"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/setting_auto_device_status"
+        app:layout_constraintEnd_toStartOf="@+id/setting_auto_device_status"
+        app:layout_constraintHorizontal_bias="0.587"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/setting_auto_device_status"
+        app:layout_constraintVertical_bias="0.391"></TextView>
+
+
+    <TextView
+        android:id="@+id/setting_auto_device_status"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:background="@drawable/rectangle"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="ON"
+        app:layout_constraintBottom_toTopOf="@+id/setting_auto_blank_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.768"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setting_auto_blank_space"
+        app:layout_constraintVertical_bias="0.49"
+         />
+
+    <TextView
+        android:id="@+id/setting_auto_blank_space"
+        android:layout_width="fill_parent"
+        android:layout_height="20dp"
+
+        android:layout_marginTop="116dp"
+        android:background="#222222"
+        app:layout_constraintBottom_toTopOf="@+id/setting_auto_blank_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"></TextView>
+
+    <TextView
+        android:id="@+id/setting_auto_blank_text"
+        android:layout_width="fill_parent"
+        android:layout_height="61dp"
+        android:layout_marginBottom="80dp"
+        android:gravity="center"
+        android:minLines="2"
+        android:text="Automatically turn on/off the light depending \n
+         on the room's darkness"
+        android:textColor="#FDA43C"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/setting_auto_seek_bar_1"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"></TextView>
+
+    <TextView
+        android:id="@+id/setting_auto_turnon_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Turn on:"
+        android:textColor="#FDA43C"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/setting_auto_seek_bar_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.047"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setting_auto_blank_text"
+        app:layout_constraintVertical_bias="0.509"></TextView>
+
+    <TextView
+        android:id="@+id/setting_auto_lowerbound_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="4dp"
+        android:text="0"
+        android:textColor="#FDA43C"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/setting_auto_seek_bar_1"
+        app:layout_constraintStart_toStartOf="parent"></TextView>
+
+
+    <TextView
+        android:id="@+id/setting_auto_upperbound_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="1023"
+        android:textColor="#FDA43C"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/setting_auto_seek_bar_1"
+        app:layout_constraintEnd_toEndOf="@+id/setting_auto_seek_bar_1"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/setting_auto_lowerbound_1"></TextView>
+
     <SeekBar
         android:id="@+id/setting_auto_seek_bar_1"
         android:layout_width="match_parent"
         android:layout_height="20dp"
+        android:layout_margin="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="48dp">
+        app:layout_constraintVertical_bias="0.569"
+        tools:layout_editor_absoluteX="0dp"></SeekBar>
 
-    </SeekBar>
+
+    <TextView
+        android:id="@+id/setting_auto_turnoff_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Turn off:"
+        android:textColor="#FDA43C"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/setting_auto_seek_bar_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.048"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setting_auto_seek_bar_1"
+        app:layout_constraintVertical_bias="0.625"></TextView>
+
+    <TextView
+        android:id="@+id/setting_auto_lowerbound_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="4dp"
+        android:text="0"
+        android:textColor="#FDA43C"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/setting_auto_seek_bar_2"
+        app:layout_constraintStart_toStartOf="parent"></TextView>
+
+    <TextView
+        android:id="@+id/setting_auto_upperbound_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="1023"
+        android:textColor="#FDA43C"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/setting_auto_seek_bar_2"
+        app:layout_constraintEnd_toEndOf="@+id/setting_auto_seek_bar_2"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/setting_auto_lowerbound_1"></TextView>
+
+    <SeekBar
+        android:id="@+id/setting_auto_seek_bar_2"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_margin="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.735"
+        tools:layout_editor_absoluteX="-31dp"></SeekBar>
+
+    <TextView
+        android:id="@+id/setting_auto_set_default"
+        android:layout_width="140dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="32dp"
+        android:background="@drawable/rectangle"
+        android:gravity="center"
+        android:text="Set Default"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setting_auto_seek_bar_2"
+        app:layout_constraintVertical_bias="0.503"></TextView>
+
+    <TextView
+        android:id="@+id/setting_auto_confirm"
+        android:layout_width="140dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="40dp"
+        android:background="@drawable/rectangle"
+        android:gravity="center"
+        android:text="Confirm"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.439"
+        app:layout_constraintStart_toEndOf="@+id/setting_auto_set_default"
+        app:layout_constraintTop_toBottomOf="@+id/setting_auto_seek_bar_2"
+        app:layout_constraintVertical_bias="0.503"></TextView>
 </androidx.constraintlayout.widget.ConstraintLayout>
