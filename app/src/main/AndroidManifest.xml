@@ -31,6 +31,8 @@
             android:name=".SetTurnOnOffTimeActivity"
             android:parentActivityName=".ViewDeviceActivity"
             android:theme="@style/Theme.MaterialComponents.NoActionBar" />
+        <activity android:name=".DevicereportActivity"></activity>
+        <activity android:name=".ReportActivity" />
         <activity
             android:name=".ViewDeviceActivity"
             android:parentActivityName=".MainActivity"
