@@ -46,9 +46,9 @@ class ViewDeviceActivity : AppCompatActivity() {
     private fun makeMessage(device: Device, data: String): JSONObject{
         val message = JSONObject()
         message.put("id", "11")
+        message.put("name", "RELAY")
         message.put("data", data)
         message.put("unit", "")
-        message.put("name", "RELAY")
         return message
     }
 }
