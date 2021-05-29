@@ -29,7 +29,7 @@ class ListDeviceRecyclerViewAdapter(private val deviceList : List<Device>): Recy
 
     override fun onBindViewHolder(holder: DeviceViewHolder, position: Int) {
         val device = deviceList[position]
-        val img = Ultility(holder.itemView.context).getDeviceIcon(device)
+        val img = Utility(holder.itemView.context).getDeviceIcon(device)
         img?.setBounds(0, 5, 175, 175)
         holder.button.text = device.name
         holder.button.setCompoundDrawables(null, img, null, null)

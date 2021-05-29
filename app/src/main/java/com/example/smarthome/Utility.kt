@@ -3,7 +3,7 @@ package com.example.smarthome
 import android.content.Context
 import androidx.core.content.ContextCompat
 
-class Ultility(var context: Context) {
+class Utility(var context: Context) {
     fun getDeviceIcon(device: Device) =
         when(device.deviceType){
             DeviceType.Door -> ContextCompat.getDrawable(context, R.drawable.ic_door_closed)

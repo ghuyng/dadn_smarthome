@@ -28,7 +28,7 @@ class ViewDeviceActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListene
         findViewById<TextView>(R.id.device_room).text = device.room
         findViewById<TextView>(R.id.device_name).text = device.name
         findViewById<TextView>(R.id.device_status).text = if (device.status) "ON" else "OFF"
-        findViewById<ImageView>(R.id.device_image).setImageDrawable(Ultility(this).getDeviceImage(device))
+        findViewById<ImageView>(R.id.device_image).setImageDrawable(Utility(this).getDeviceImage(device))
     }
 
     private fun changeDeviceStatus(){

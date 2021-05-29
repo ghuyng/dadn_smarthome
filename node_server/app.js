@@ -11,7 +11,7 @@ app.use(
     })
 )
 
-const hostname = '0.0.0.0'
+const hostname = '127.0.0.1'
 const port = 3000
 
 
