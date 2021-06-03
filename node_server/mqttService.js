@@ -17,7 +17,9 @@ const lightSensorTopic = 'CSE_BBC1/feeds/bk-iot-light'
 const magneticTopic = 'CSE_BBC/feeds/bk-iot-magnetic'
 const buzzerTopic = 'CSE_BBC/feeds/bk-iot-speaker'
 var isLocked = true
-const lightLimit = 100 
+var lightStatus = false
+const lightLowerBound = 100 
+const lightUpperBound = 700 
 
 clientBBC.on('error', (error) =>{
   console.log(error.message)
@@ -52,6 +54,29 @@ clientBBC1.on('connect', ()=>{
 
 clientBBC1.on('message', (topic, message) =>{
   console.log(`topic : ${topic}, message : ${message}`)
+  if (topic == lightSensorTopic){
+    const jsonObj = JSON.parse(message)
+    // if (jsonObj["data"] < lightLowerBound && !lightStatus){
+    if (jsonObj["data"] < lightLowerBound){
+      lightStatus = !lightStatus;
+      clientBBC1.publish(relayTopic, JSON.stringify({
+        "id":"11",
+        "name":"RELAY",
+        "data":"1",
+        "unit":""
+      }))
+    }
+    // else if (jsonObj["data"] > lightUpperBound && lightStatus){
+    else if (jsonObj["data"] > lightUpperBound){
+      lightStatus = !lightStatus;
+      clientBBC1.publish(relayTopic, JSON.stringify({
+        "id":"11",
+        "name":"RELAY",
+        "data":"0",
+        "unit":""
+      }))
+    }
+  }
 })
 
 function changeRelay(message){
