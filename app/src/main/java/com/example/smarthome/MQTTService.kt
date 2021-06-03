@@ -11,8 +11,8 @@ class MQTTService(private val context: Context){
     final val serverUri = "tcp://io.adafruit.com:1883"
     final val clientId = MqttClient.generateClientId()
     final val subscriptionTopic = "ghuyng/feeds/my-item"
-    final val username = "ghuyng"
-    final val password = "aio_thba95RRI8smeEXs5K7EpurrH7qN"
+    final val username = "CSE_BBC"
+    final val password = ""
 
 
     val mqttAndroidClient: MqttAndroidClient = MqttAndroidClient(context, serverUri, clientId)
