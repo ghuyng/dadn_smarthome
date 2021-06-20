@@ -3,12 +3,14 @@ const mqtt = require('mqtt')
 
 const clientBBC = mqtt.connect('mqtts://io.adafruit.com:8883',{
   username: "CSE_BBC",
-  password: ""
+  password: "",
+  reconnectPeriod: 0
 })
 
 const clientBBC1 = mqtt.connect('mqtts://io.adafruit.com:8883',{
   username: "CSE_BBC1",
-  password: ""
+  password: "",
+  reconnectPeriod: 0
 })
 
 

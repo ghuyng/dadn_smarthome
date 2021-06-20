@@ -12,13 +12,17 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.smarthome.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import io.socket.client.IO
+import io.socket.client.Socket
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken
 import org.eclipse.paho.client.mqttv3.MqttCallbackExtended
 import org.eclipse.paho.client.mqttv3.MqttMessage
+import java.net.URISyntaxException
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var mSocket: Socket
 
     companion object {
         @SuppressLint("StaticFieldLeak")
@@ -51,6 +55,11 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+        try {
+            mSocket = IO.socket("http://192.168.1.6:3000")
+            mSocket.connect()
+            mSocket.emit("switchRelay", "abcxyz")
+        } catch (e: URISyntaxException) {}
         mqttService = MQTTService(this.applicationContext)
         mqttService.setCallback(object : MqttCallbackExtended {
             override fun connectionLost(cause: Throwable?) {}

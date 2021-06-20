@@ -1,8 +1,10 @@
 const express = require('express')
 const http = require('http')
 const app = express()
+const server = http.createServer(app)
 // const bodyParser = require('body-parser')
 const clientMqtt = require('./mqttService')
+const io = require('socket.io')(server)
 
 app.use(express.json())
 app.use(
@@ -13,6 +15,21 @@ app.use(
 
 const hostname = '0.0.0.0'
 const port = 3000
+
+server.listen(port, () => {
+  console.log(`Server running at http://${hostname}:${port}/`)
+})
+
+
+io.on('connection', (socket) => {
+  console.log('user connected')
+
+  socket.on('switchRelay', (message) => {
+    console.log(message)
+  })
+
+
+})
 
 
 app.get('/', (req, res) => {
@@ -38,6 +55,3 @@ app.post('/turn-device', (req, res) =>{
   })
 })
 
-app.listen(port, () => {
-  console.log(`Server running at http://${hostname}:${port}/`)
-})
