@@ -14,6 +14,7 @@ import com.example.smarthome.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.socket.client.IO
 import io.socket.client.Socket
+import io.socket.emitter.Emitter
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken
 import org.eclipse.paho.client.mqttv3.MqttCallbackExtended
 import org.eclipse.paho.client.mqttv3.MqttMessage
@@ -60,6 +61,10 @@ class MainActivity : AppCompatActivity() {
             mSocket.connect()
             mSocket.emit("switchRelay", "abcxyz")
         } catch (e: URISyntaxException) {}
+        mSocket.on("alert", Emitter.Listener {
+            val intent = Intent(this, SignUpActivity::class.java)
+            startActivityForResult(intent, 200)
+        })
         mqttService = MQTTService(this.applicationContext)
         mqttService.setCallback(object : MqttCallbackExtended {
             override fun connectionLost(cause: Throwable?) {}
