@@ -1,5 +1,6 @@
 package com.example.smarthome.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +9,10 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.smarthome.R
+import com.example.smarthome.MainActivity
 import com.example.smarthome.databinding.FragmentHomeBinding
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class HomeFragment : Fragment() {
 
@@ -35,6 +38,14 @@ class HomeFragment : Fragment() {
         homeViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
+
+        val signOutBtn = binding.btnSignout
+        signOutBtn.setOnClickListener { v: View ->
+            Firebase.auth.signOut()
+            var intent = Intent(context, MainActivity::class.java)
+            context?.startActivity(intent)
+            activity?.finish()
+        }
         return root
     }
 

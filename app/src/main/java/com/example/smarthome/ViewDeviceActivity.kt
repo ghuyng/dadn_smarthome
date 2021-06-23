@@ -24,7 +24,6 @@ class ViewDeviceActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListene
         findViewById<ImageButton>(R.id.setting_button).setOnClickListener{ showDeviceSettingPopup() }
 
         val device = intent.getSerializableExtra("device") as Device
-        mqttService = MainActivity.mqttService
         findViewById<TextView>(R.id.device_room).text = device.room
         findViewById<TextView>(R.id.device_name).text = device.name
         findViewById<TextView>(R.id.device_status).text = if (device.status) "ON" else "OFF"
@@ -36,7 +35,6 @@ class ViewDeviceActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListene
         device.status = !device.status
         val statusStr: String = if (device.status) "ON" else "OFF"
         findViewById<TextView>(R.id.device_status).text = statusStr
-//        mqttService.sendDataMQTT(makeMessage(device, (if (device.status) 1 else 0).toString()).toString())
 
         apiController.jsonObjectGET("/"){ res ->
             println(res.toString())

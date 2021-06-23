@@ -4,7 +4,6 @@ const app = express()
 const server = http.createServer(app)
 // const bodyParser = require('body-parser')
 const clientMqtt = require('./mqttService')
-const { admin } = require('./firebase-config')
 
 const { io } = require('./socket')
 io.listen(server)
@@ -23,26 +22,6 @@ server.listen(port, () => {
 })
 
 
-var registrationtoken = ''
-const sendAlert = (regToken => {
-  const notification_options = {
-    priority: "high",
-    timeToLive: 60 * 60 * 24
-  };
-  const message = {
-    notification: {
-      title: 'SmartHome ALERT',
-      body: 'ALERT!! YOUR DOOR WAS OPENED'
-    }
-  };
-  admin.messaging().sendToDevice(regToken, message, notification_options)
-      .then( res => {
-        console.log(res)
-      })
-      .catch( error => {
-          console.log(error);
-      });
-})
 
 app.get('/', (req, res) => {
   // res.send('Hello World\n')
@@ -62,7 +41,6 @@ app.get('/user', (req, res) => {
 app.post('/turn-device', (req, res) =>{
   console.log(req.body)
   clientMqtt.changeRelay(JSON.stringify(req.body))
-  sendAlert(registrationtoken)
   res.status(200).json({
     message: "good"
   })
@@ -70,7 +48,7 @@ app.post('/turn-device', (req, res) =>{
 
 app.post('/set-registrationtoken', (req, res) => {
   console.log(req.body)
-  registrationtoken = req.body.message
+  clientMqtt.saveRegToken(req.body.message)
   res.status(200).json({
     message: "good"
   })

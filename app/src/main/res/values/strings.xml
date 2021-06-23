@@ -2,7 +2,7 @@
     <string name="app_name">Smart Home</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Devices</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_notifications">Stats</string>
     <string name="doors">Doors</string>
     <string name="front_door">Front Door</string>
     <string name="back_door">Back Door</string>
@@ -10,4 +10,5 @@
     <string name="auto_mode">Auto mode:</string>
     <string name="title_activity_sign_up">SignUpActivity</string>
     <string name="default_notification_channel_id">smarthome_noti_channel</string>
+    <string name="sign_out">Sign Out</string>
 </resources>

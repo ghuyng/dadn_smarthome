@@ -7,13 +7,13 @@ const uname = "ghuyng"
 const uname1 = "ghuyng"
 const clientBBC = mqtt.connect('mqtts://io.adafruit.com:8883',{
   username: uname,
-  password: "aio_EsRw631DrjoTXOHskPvuNmos7IVn",
+  password: "aio_xOdz02Yaoj8MOYscLABbyCOLwLXM",
   reconnectPeriod: 0
 })
 
 const clientBBC1 = mqtt.connect('mqtts://io.adafruit.com:8883',{
   username: uname1,
-  password: "aio_EsRw631DrjoTXOHskPvuNmos7IVn",
+  password: "aio_xOdz02Yaoj8MOYscLABbyCOLwLXM",
   reconnectPeriod: 0
 })
 
@@ -28,6 +28,32 @@ const lightLowerBound = 100
 const lightUpperBound = 700 
 
 const { io } = require('./socket')
+const { admin } = require('./firebase-config')
+
+var registrationtoken = ''
+const sendAlert = (regToken => {
+  const notification_options = {
+    priority: "high",
+    timeToLive: 60 * 60 * 24
+  };
+  const message = {
+    notification: {
+      title: 'SmartHome ALERT',
+      body: 'ALERT!! YOUR DOOR WAS OPENED'
+    }
+  };
+  admin.messaging().sendToDevice(regToken, message, notification_options)
+      .then( res => {
+        console.log(res)
+      })
+      .catch( error => {
+          console.log(error);
+      });
+})
+
+const saveRegToken = (regToken => {
+  registrationtoken = regToken
+})
 
 clientBBC.on('error', (error) =>{
   console.log(error.message)
@@ -50,6 +76,7 @@ clientBBC.on('message', async (topic, message) =>{
       "unit":""
     }
     clientBBC.publish(buzzerTopic, JSON.stringify(jsonObj))
+    sendAlert(registrationtoken)
     for (const socket of sockets){
       socket.emit("alert")
     }
@@ -105,5 +132,6 @@ function changeRelay(message){
 }
 
 module.exports = {
-    changeRelay
+    changeRelay,
+    saveRegToken
 }
