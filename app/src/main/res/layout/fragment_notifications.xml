@@ -4,19 +4,77 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/gradient_background"
     tools:context=".ui.notifications.NotificationsFragment">
 
     <TextView
-        android:id="@+id/text_notifications"
+        android:layout_constraintEnd_toEndOf="parent"
+        android:layout_constraintStart_toStartOf="parent"
+        android:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:text="Monthly Report"
+        android:textColor="@color/orange"
+        android:textSize="50dp"
+        />
+
+    <LinearLayout
+        android:layout_constraintEnd_toEndOf="parent"
+        android:layout_constraintStart_toStartOf="parent"
+        android:layout_constraintTop_toTopOf="parent"
+        android:paddingVertical="100dp"
+        android:layout_width="match_parent"
+        android:layout_marginTop="100dp"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <TextView
+            android:layout_constraintEnd_toEndOf="parent"
+            android:layout_constraintStart_toStartOf="parent"
+            android:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/detailText"
+            android:textColor="@color/orange"
+            android:textSize="30dp"
+            android:text="Details" />
+
+        <Button
+            android:layout_marginTop="20dp"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:id="@+id/ButtonFans"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:background="@color/orange"
+            android:text="FANS"
+            />
+        <Button
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:id="@+id/ButtonAC"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:background="@color/orange"
+            android:layout_marginTop="20dp"
+            android:text="AIR-CONDITIONERS"
+            />
+        <Button
+            android:layout_width="350dp"
+            android:layout_marginTop="20dp"
+            android:layout_height="50dp"
+            android:id="@+id/ButtonLights"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:background="@color/orange"
+            android:text="LIGHTS"
+
+            />
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
