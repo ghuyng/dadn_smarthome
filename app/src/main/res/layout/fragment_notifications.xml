@@ -15,11 +15,11 @@
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="0dp"
         android:gravity="center"
         android:text="Monthly Report"
         android:textColor="@color/orange"
-        android:textSize="50dp"
+        android:textSize="40dp"
         />
 
     <LinearLayout
