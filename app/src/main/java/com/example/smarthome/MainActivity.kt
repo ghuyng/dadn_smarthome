@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -11,13 +12,16 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.smarthome.databinding.ActivityMainBinding
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.messaging.FirebaseMessaging
 import io.socket.client.IO
 import io.socket.client.Socket
 import io.socket.emitter.Emitter
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken
 import org.eclipse.paho.client.mqttv3.MqttCallbackExtended
 import org.eclipse.paho.client.mqttv3.MqttMessage
+import org.json.JSONObject
 import java.net.URISyntaxException
 
 class MainActivity : AppCompatActivity() {
@@ -64,6 +68,20 @@ class MainActivity : AppCompatActivity() {
         mSocket.on("alert", Emitter.Listener {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivityForResult(intent, 200)
+        })
+
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w("MainActivity", "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            val token = task.result
+            var apiController = APIController(this)
+            apiController.jsonObjectPOST("/set-registrationtoken", JSONObject().put("message", token)){
+                    res -> Log.d("MainActivity", res.toString())
+            }
         })
         mqttService = MQTTService(this.applicationContext)
         mqttService.setCallback(object : MqttCallbackExtended {
