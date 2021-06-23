@@ -7,6 +7,7 @@
     <string name="front_door">Front Door</string>
     <string name="back_door">Back Door</string>
     <string name="status">Status:</string>
+    <string name="welcome_home"> <b>WELCOME TO <br/>  YOUR OWN SMART HOME</b></string>
     <string name="warning">Warning !!!</string>
     <string name="warning_ic">Warning icon</string>
     <string name="stop_alert"><b>STOP</b> <br/>THE ALERT</string>
