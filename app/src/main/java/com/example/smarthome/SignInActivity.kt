@@ -14,7 +14,7 @@ import android.widget.Toast
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-class SignInActivity : AppCompatActivity() {
+class ulSignInActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAuthenticateBinding
     private lateinit var auth: FirebaseAuth
