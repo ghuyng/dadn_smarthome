@@ -29,7 +29,7 @@ class ListDeviceRecyclerViewAdapter(private val deviceList : List<Device>): Recy
 
     override fun onBindViewHolder(holder: DeviceViewHolder, position: Int) {
         val device = deviceList[position]
-        val img = Ultility(holder.itemView.context).getDeviceIcon(device)
+        val img = Utility(holder.itemView.context).getDeviceIcon(device)
         img?.setBounds(0, 5, 175, 175)
         holder.button.text = device.name
         holder.button.setCompoundDrawables(null, img, null, null)
@@ -59,14 +59,14 @@ class ListRoomRecyclerViewAdapter(private val roomList : List<Room>): RecyclerVi
         }
     }
 
-     fun viewDeviceList(room: Room, view: View){
-         val deviceList = room.getDevices()
-         val deviceAdapter = ListDeviceRecyclerViewAdapter(deviceList)
-         val root = view.rootView
-         val deviceRecyclerView: RecyclerView = root.findViewById(R.id.recycler_view_device)
-         deviceRecyclerView.layoutManager = GridLayoutManager(root.context, 2)
-         deviceRecyclerView.adapter = deviceAdapter
-     }
+    fun viewDeviceList(room: Room, view: View){
+        val deviceList = room.getDevices()
+        val deviceAdapter = ListDeviceRecyclerViewAdapter(deviceList)
+        val root = view.rootView
+        val deviceRecyclerView: RecyclerView = root.findViewById(R.id.recycler_view_device)
+        deviceRecyclerView.layoutManager = GridLayoutManager(root.context, 2)
+        deviceRecyclerView.adapter = deviceAdapter
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_room_layout, parent, false)

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.smarthome">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -13,10 +14,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartHome">
-        <activity android:name=".ViewDeviceActivity"
+
+        <activity
+            android:name=".SignUpActivity"
+            android:label="@string/title_activity_sign_up"
+            android:theme="@style/Theme.SmartHome.NoActionBar" />
+        <activity
+            android:name=".SignInActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar" />
+
+        <activity
+            android:name=".SetAutoModeActivity"
+            android:parentActivityName=".ViewDeviceActivity"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar"/>
+        <activity
+            android:name=".SetTurnOnOffTimeActivity"
+            android:parentActivityName=".ViewDeviceActivity"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar" />
+        <activity android:name=".DevicereportActivity"></activity>
+        <activity android:name=".ReportActivity" />
+        <activity
+            android:name=".ViewDeviceActivity"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/Theme.MaterialComponents.NoActionBar">
-        </activity>
+            android:theme="@style/Theme.MaterialComponents.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">
@@ -26,9 +47,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
+
         <service android:name="org.eclipse.paho.android.service.MqttService" />
     </application>
-
-
 </manifest>
