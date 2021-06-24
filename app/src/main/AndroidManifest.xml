@@ -11,9 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartHome">
-        <activity android:name=".DevicereportActivity"></activity>
+        <activity android:name=".DevicereportActivity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar">
+        </activity>
 
-        <activity android:name=".ReportActivity" />
         <activity android:name=".ViewDeviceActivity"
             android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.MaterialComponents.NoActionBar">

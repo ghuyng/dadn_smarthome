@@ -15,8 +15,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/usage_detail"
         android:text="Usage Details"
-        android:textSize="50dp"
-        android:textStyle="bold"
+        android:textSize="35dp"
         android:textColor="@color/light_orange"/>
 
     <ImageView
