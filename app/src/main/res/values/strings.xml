@@ -7,7 +7,10 @@
     <string name="front_door">Front Door</string>
     <string name="back_door">Back Door</string>
     <string name="status">Status:</string>
+    <string name="auto_mode">Auto mode:</string>
+    <string name="title_activity_sign_up">SignUpActivity</string>
     <string name="welcome_home"> <b>WELCOME TO <br/>  YOUR OWN SMART HOME</b></string>
+    <string name="sign_out_btn">SIGN OUT</string>
     <string name="warning">Warning !!!</string>
     <string name="warning_ic">Warning icon</string>
     <string name="stop_alert"><b>STOP</b> <br/>THE ALERT</string>
@@ -16,4 +19,5 @@
     <string name="message_warning"> Someone is trespassing on your home!
         Confirm that you want to stop the alert!
     </string>
+    <string name="description_home"> <i>Make your home life easier</i> !</string>
 </resources>
