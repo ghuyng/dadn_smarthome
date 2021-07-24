@@ -26,15 +26,14 @@ class ViewDeviceActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListene
         val device = intent.getSerializableExtra("device") as Device
         findViewById<TextView>(R.id.device_room).text = device.room
         findViewById<TextView>(R.id.device_name).text = device.name
-        findViewById<TextView>(R.id.device_status).text = if (device.status) "ON" else "OFF"
+        findViewById<TextView>(R.id.device_status).text = getDeviceStatus(device)
         findViewById<ImageView>(R.id.device_image).setImageDrawable(Utility(this).getDeviceImage(device))
     }
 
     private fun changeDeviceStatus(){
         val device = intent.getSerializableExtra("device") as Device
         device.status = !device.status
-        val statusStr: String = if (device.status) "ON" else "OFF"
-        findViewById<TextView>(R.id.device_status).text = statusStr
+        findViewById<TextView>(R.id.device_status).text = getDeviceStatus(device)
 
         apiController.jsonObjectGET("/"){ res ->
             println(res.toString())
@@ -45,6 +44,13 @@ class ViewDeviceActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListene
             println(res.toString())
         }
 
+    }
+
+    private fun getDeviceStatus(device: Device): String {
+        if (device.deviceType == DeviceType.Door) {
+            return if (device.status) "LOCKED" else "UNLOCKED"
+        }
+        return if (device.status) "ON" else "OFF"
     }
 
     private fun makeMessage(device: Device, data: String): JSONObject{

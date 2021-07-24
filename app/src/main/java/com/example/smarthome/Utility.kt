@@ -9,7 +9,8 @@ class Utility(var context: Context) {
             DeviceType.Door -> ContextCompat.getDrawable(context, R.drawable.ic_door_closed)
             DeviceType.Light -> ContextCompat.getDrawable(context, R.drawable.ic_light)
             DeviceType.Fan -> ContextCompat.getDrawable(context, R.drawable.ic_fan)
-            DeviceType.TV -> ContextCompat.getDrawable(context, R.drawable.ic_solid_tv)
+            DeviceType.TV -> ContextCompat.getDrawable(context, R.drawable.ic_tv)
+            DeviceType.Airconditioner -> ContextCompat.getDrawable(context, R.drawable.ic_airconditioner)
             else -> ContextCompat.getDrawable(context, R.drawable.ic_settings)
         }
 
@@ -18,7 +19,8 @@ class Utility(var context: Context) {
             DeviceType.Door -> ContextCompat.getDrawable(context, R.drawable.img_door)
             DeviceType.Light -> ContextCompat.getDrawable(context, R.drawable.img_light)
             DeviceType.Fan -> ContextCompat.getDrawable(context, R.drawable.img_fan)
-            DeviceType.TV -> ContextCompat.getDrawable(context, R.drawable.ic_solid_tv)
+            DeviceType.TV -> ContextCompat.getDrawable(context, R.drawable.img_tv)
+            DeviceType.Airconditioner -> ContextCompat.getDrawable(context, R.drawable.img_airconditioner)
             else -> ContextCompat.getDrawable(context, R.drawable.ic_settings)
         }
 }

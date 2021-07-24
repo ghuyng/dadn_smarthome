@@ -50,6 +50,26 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
         else {
+            val roomListener = object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    roomList = mutableListOf()
+                    (dataSnapshot.value as Map<String, *>).forEach { roomData ->
+                        val room = Room(roomData.key)
+                        room.deviceList = mutableListOf()
+                        (roomData.value as Map<String, *>).forEach { deviceData ->
+                            room.deviceList.add(parseDeviceFromDB(room.name, deviceData))
+                        }
+                        roomList.add(room)
+                    }
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    // Getting Post failed, log a message
+                    Log.w("FIREBASE", "loadPost:onCancelled", databaseError.toException())
+                }
+            }
+
+            mDatabase.child("Room").addValueEventListener(roomListener)
             Toast.makeText(this, "Welcome ${currentUser.email}", Toast.LENGTH_SHORT).show()
             binding = ActivityMainBinding.inflate(layoutInflater)
             setContentView(binding.root)
@@ -96,25 +116,6 @@ class MainActivity : AppCompatActivity() {
             })
 
 
-            val roomListener = object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    roomList = mutableListOf()
-                    (dataSnapshot.value as Map<String, *>).forEach { roomData ->
-                        val room = Room(roomData.key)
-                        room.deviceList = mutableListOf()
-                        (roomData.value as Map<String, *>).forEach { deviceData ->
-                            room.deviceList.add(parseDeviceFromDB(room.name, deviceData))
-                        }
-                        roomList.add(room)
-                    }
-                }
-
-                override fun onCancelled(databaseError: DatabaseError) {
-                    // Getting Post failed, log a message
-                    Log.w("FIREBASE", "loadPost:onCancelled", databaseError.toException())
-                }
-            }
-            mDatabase.child("Room").addValueEventListener(roomListener)
         }
 
     }
