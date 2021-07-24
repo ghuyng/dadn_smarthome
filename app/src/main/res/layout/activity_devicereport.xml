@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
+    tools:viewBindingIgnore="true"
     tools:context=".DevicereportActivity">
     <TextView
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,6 +51,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/device_image"
         android:textColor="@color/light_orange"
-        tools:text="Device Name" />
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

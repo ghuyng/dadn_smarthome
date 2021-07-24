@@ -33,9 +33,26 @@ class NotificationsFragment : Fragment() {
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
         val btnFans: Button= binding.ButtonFans
+        val btnAC: Button= binding.ButtonAC
+        val btnLights: Button = binding.ButtonLights
         btnFans.setOnClickListener {
             activity?.let{
                 val intent = Intent (it, DevicereportActivity::class.java)
+                intent.putExtra("value","Fans")
+                it.startActivity(intent)
+            }
+        }
+        btnAC.setOnClickListener {
+            activity?.let{
+                val intent = Intent (it, DevicereportActivity::class.java)
+                intent.putExtra("value","Air-conditioners")
+                it.startActivity(intent)
+            }
+        }
+        btnLights.setOnClickListener {
+            activity?.let{
+                val intent = Intent (it, DevicereportActivity::class.java)
+                intent.putExtra("value","Lights")
                 it.startActivity(intent)
             }
         }
