@@ -15,6 +15,11 @@ import com.example.smarthome.databinding.ActivityMainBinding
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import io.socket.client.IO
@@ -27,13 +32,11 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var mSocket: Socket
+    private var mDatabase: DatabaseReference = Firebase.database.reference
 
     companion object {
         @SuppressLint("StaticFieldLeak")
-        var roomList: List<Room> = listOf(
-            Room("Living Room"), Room("Kitchen"),
-            Room("BedRoom"), Room("Bath Room"), Room("Garage")
-        )
+        var roomList = mutableListOf<Room>()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -91,6 +94,27 @@ class MainActivity : AppCompatActivity() {
                     Log.d("MainActivity", res.toString())
                 }
             })
+
+
+            val roomListener = object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    roomList = mutableListOf()
+                    (dataSnapshot.value as Map<String, *>).forEach { roomData ->
+                        val room = Room(roomData.key)
+                        room.deviceList = mutableListOf()
+                        (roomData.value as Map<String, *>).forEach { deviceData ->
+                            room.deviceList.add(parseDeviceFromDB(room.name, deviceData))
+                        }
+                        roomList.add(room)
+                    }
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    // Getting Post failed, log a message
+                    Log.w("FIREBASE", "loadPost:onCancelled", databaseError.toException())
+                }
+            }
+            mDatabase.child("Room").addValueEventListener(roomListener)
         }
 
     }
@@ -106,6 +130,15 @@ class MainActivity : AppCompatActivity() {
                 finish()
             }
         }
+    }
+
+    private fun parseDeviceFromDB(roomName: String, data: Map.Entry<String, *>): Device {
+        val name = data.key
+        val deviceAttrs = data.value as Map<String, *>
+        val type = DeviceType.valueOf(deviceAttrs["Type"] as String)
+        val status = deviceAttrs["Status"] as Boolean
+
+        return Device(name, roomName, type, status)
     }
 
 }
