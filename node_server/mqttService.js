@@ -7,13 +7,13 @@ const uname = "ghuyng"
 const uname1 = "ghuyng"
 const clientBBC = mqtt.connect('mqtts://io.adafruit.com:8883',{
   username: uname,
-  password: "aio_xOdz02Yaoj8MOYscLABbyCOLwLXM",
+  password: "",
   reconnectPeriod: 0
 })
 
 const clientBBC1 = mqtt.connect('mqtts://io.adafruit.com:8883',{
   username: uname1,
-  password: "aio_xOdz02Yaoj8MOYscLABbyCOLwLXM",
+  password: "",
   reconnectPeriod: 0
 })
 
@@ -22,13 +22,10 @@ const relayTopic = uname1 + '/feeds/bk-iot-relay'
 const lightSensorTopic = uname1 + '/feeds/bk-iot-light'
 const magneticTopic = uname + '/feeds/bk-iot-magnetic'
 const buzzerTopic = uname + '/feeds/bk-iot-speaker'
-var isLocked = true
-var lightStatus = false
-const lightLowerBound = 100 
-const lightUpperBound = 700 
 
 const { io } = require('./socket')
 const { admin } = require('./firebase-config')
+const { defaultLight, defaultDoor} = require('./track-device')
 
 const database = admin.database()
 var registrationtoken = ''
@@ -66,9 +63,8 @@ clientBBC.on('connect', ()=>{
 })
 
 clientBBC.on('message', async (topic, message) =>{
-  // const sockets = await io.fetchSockets()
   console.log(`topic : ${topic}, message : ${message}`)
-  if (isLocked && topic == magneticTopic){
+  if (defaultDoor.status && topic == magneticTopic){
     console.log("here")
     jsonObj = {
       "id":"2",
@@ -97,25 +93,13 @@ clientBBC1.on('message', (topic, message) =>{
   console.log(`topic : ${topic}, message : ${message}`)
   if (topic == lightSensorTopic){
     const jsonObj = JSON.parse(message)
-    // if (jsonObj["data"] < lightLowerBound && !lightStatus){
-    if (jsonObj["data"] < lightLowerBound){
-      lightStatus = !lightStatus;
-      clientBBC1.publish(relayTopic, JSON.stringify({
-        "id":"11",
-        "name":"RELAY",
-        "data":"1",
-        "unit":""
-      }))
-    }
-    // else if (jsonObj["data"] > lightUpperBound && lightStatus){
-    else if (jsonObj["data"] > lightUpperBound){
-      lightStatus = !lightStatus;
-      clientBBC1.publish(relayTopic, JSON.stringify({
-        "id":"11",
-        "name":"RELAY",
-        "data":"0",
-        "unit":""
-      }))
+    if (jsonObj["data"] < defaultLight.lowLimit && !defaultLight.status
+      || jsonObj["data"] > defaultLight.highLimit && defaultLight.status){
+      changeRelay({
+        data: !defaultLight.status,
+        room: defaultLight.room,
+        device: defaultLight.name
+      })
     }
   }
 })
@@ -133,7 +117,21 @@ function changeRelay(message){
 
           return
         }
-        database.ref(`Room/${message.room}/${message.device}/Status`).set(message.data)
+        const dbRef = database.ref(`Room/${message.room}/${message.device}`)
+        dbRef.child('Status').set(message.data)
+        dbRef.child(`${message.data? "On": "Off"}`).get().then((snapshot) => {
+          if (snapshot.exists()) {
+            var timeList = snapshot.val()
+            var currentTime = new Date()
+            timeList.push(`${currentTime.getFullYear()}-${currentTime.getMonth()}-${currentTime.getDate()} ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`)
+            dbRef.child(`${message.data? "On": "Off"}`).set(timeList)
+            console.log(timeList);
+          } else {
+            console.log("No data available");
+          }
+        }).catch((error) => {
+          console.error(error);
+        });
       })
 }
 
