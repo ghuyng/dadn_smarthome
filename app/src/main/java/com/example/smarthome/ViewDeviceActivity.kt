@@ -71,12 +71,16 @@ class ViewDeviceActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListene
         return when (item.itemId){
             R.id.option_set_power_schedule -> {
                 val i = Intent(this, SetTurnOnOffTimeActivity::class.java)
+                val device = intent.getSerializableExtra("device") as Device
+                i.putExtra("device", device)
                 startActivity(i)
 //                Toast.makeText(this, ,"Set power selected", Toast.LENGTH_SHORT).show()
                 true
             }
             R.id.option_set_auto_mode -> {
                 val i = Intent(this, SetAutoModeActivity::class.java)
+                val device = intent.getSerializableExtra("device") as Device
+                i.putExtra("device", device)
                 startActivity(i)
                 true
             }

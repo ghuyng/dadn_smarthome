@@ -45,30 +45,44 @@
         android:text="Automode"
         android:textColor="#FDA43C"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/setting_auto_device_status"
-        app:layout_constraintEnd_toStartOf="@+id/setting_auto_device_status"
+        app:layout_constraintBottom_toBottomOf="@+id/setting_auto_state_switch"
+        app:layout_constraintEnd_toStartOf="@+id/setting_auto_state_switch"
         app:layout_constraintHorizontal_bias="0.587"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/setting_auto_device_status"
+        app:layout_constraintTop_toTopOf="@+id/setting_auto_state_switch"
         app:layout_constraintVertical_bias="0.391"></TextView>
 
+    <!--    <TextView-->
+<!--        android:id="@+id/setting_auto_device_status"-->
+<!--        android:layout_width="100dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:background="@drawable/rectangle"-->
+<!--        android:gravity="center"-->
+<!--        android:textSize="20sp"-->
+<!--        android:textStyle="bold"-->
+<!--        android:text="ON"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/setting_auto_blank_text"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.768"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/setting_auto_blank_space"-->
+<!--        app:layout_constraintVertical_bias="0.49"-->
+<!--         />-->
 
-    <TextView
-        android:id="@+id/setting_auto_device_status"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:background="@drawable/rectangle"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:text="ON"
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/setting_auto_state_switch"
+        android:layout_width="67dp"
+        android:layout_height="62dp"
+
+        android:scaleX="1.4"
+        android:scaleY="1.4"
         app:layout_constraintBottom_toTopOf="@+id/setting_auto_blank_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.768"
+        app:layout_constraintHorizontal_bias="0.633"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/setting_auto_blank_space"
-        app:layout_constraintVertical_bias="0.49"
-         />
+        app:layout_constraintVertical_bias="0.539"
+        app:thumbTint="#FDA43C" />
 
     <TextView
         android:id="@+id/setting_auto_blank_space"
@@ -149,6 +163,8 @@
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:layout_margin="20dp"
+        android:min="0"
+        android:max="1023"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.569"
@@ -202,6 +218,8 @@
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:layout_margin="20dp"
+        android:min="0"
+        android:max="1023"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.735"

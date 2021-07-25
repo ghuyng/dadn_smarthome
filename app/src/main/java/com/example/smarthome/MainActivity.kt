@@ -31,8 +31,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        val intent = Intent(this, SignInActivity::class.java)
-        startActivityForResult(intent, 123)
+//        val intent = Intent(this, SignInActivity::class.java)
+//        startActivityForResult(intent, 123)
 
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)

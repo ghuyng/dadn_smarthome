@@ -6,7 +6,7 @@ import com.android.volley.VolleyLog
 import com.android.volley.toolbox.JsonObjectRequest
 import org.json.JSONObject
 
-class APIController (val context: Context){
+class APIController(val context: Context){
     private val baseURL = "http://192.168.1.8:3000"
     fun jsonObjectGET(path: String, completeHandler: (JSONObject?) -> Unit ){
         val jsonObjectRequest = JsonObjectRequest(Request.Method.GET, baseURL + path, null,
