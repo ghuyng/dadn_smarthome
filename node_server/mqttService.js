@@ -30,6 +30,7 @@ const lightUpperBound = 700
 const { io } = require('./socket')
 const { admin } = require('./firebase-config')
 
+const database = admin.database()
 var registrationtoken = ''
 const sendAlert = (regToken => {
   const notification_options = {
@@ -65,7 +66,7 @@ clientBBC.on('connect', ()=>{
 })
 
 clientBBC.on('message', async (topic, message) =>{
-  const sockets = await io.fetchSockets()
+  // const sockets = await io.fetchSockets()
   console.log(`topic : ${topic}, message : ${message}`)
   if (isLocked && topic == magneticTopic){
     console.log("here")
@@ -77,9 +78,9 @@ clientBBC.on('message', async (topic, message) =>{
     }
     clientBBC.publish(buzzerTopic, JSON.stringify(jsonObj))
     sendAlert(registrationtoken)
-    for (const socket of sockets){
-      socket.emit("alert")
-    }
+    // for (const socket of sockets){
+    //   socket.emit("alert")
+    // }
   }
 })
 
@@ -120,15 +121,20 @@ clientBBC1.on('message', (topic, message) =>{
 })
 
 function changeRelay(message){
-    clientBBC1.publish(relayTopic, message)
-    isLocked = !isLocked
-    jsonObj = {
-      "id":"2",
-      "name":"SPEAKER",
-      "data":"500",
-      "unit":""
-    }
-    clientBBC.publish(buzzerTopic, JSON.stringify(jsonObj))
+    clientBBC1
+      .publish(relayTopic, JSON.stringify({
+        "id":"11",
+        "name":"RELAY",
+        "data": `${message.data? "1" : "0"}`,
+        "unit": ""
+      }), err => {
+        if (err) {
+          //Handle error
+
+          return
+        }
+        database.ref(`Room/${message.room}/${message.device}/Status`).set(message.data)
+      })
 }
 
 module.exports = {

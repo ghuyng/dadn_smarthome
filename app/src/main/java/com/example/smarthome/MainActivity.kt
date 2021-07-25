@@ -15,18 +15,12 @@ import com.example.smarthome.databinding.ActivityMainBinding
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
-import io.socket.client.IO
 import io.socket.client.Socket
-import io.socket.emitter.Emitter
 import org.json.JSONObject
-import java.net.URISyntaxException
 
 class MainActivity : AppCompatActivity() {
 
@@ -50,53 +44,6 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
         else {
-            val roomListener = object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    roomList = mutableListOf()
-                    (dataSnapshot.value as Map<String, *>).forEach { roomData ->
-                        val room = Room(roomData.key)
-                        room.deviceList = mutableListOf()
-                        (roomData.value as Map<String, *>).forEach { deviceData ->
-                            room.deviceList.add(parseDeviceFromDB(room.name, deviceData))
-                        }
-                        roomList.add(room)
-                    }
-                }
-
-                override fun onCancelled(databaseError: DatabaseError) {
-                    // Getting Post failed, log a message
-                    Log.w("FIREBASE", "loadPost:onCancelled", databaseError.toException())
-                }
-            }
-
-            mDatabase.child("Room").addValueEventListener(roomListener)
-            Toast.makeText(this, "Welcome ${currentUser.email}", Toast.LENGTH_SHORT).show()
-            binding = ActivityMainBinding.inflate(layoutInflater)
-            setContentView(binding.root)
-
-            val navView: BottomNavigationView = binding.navView
-
-            val navController = findNavController(R.id.nav_host_fragment_activity_main)
-            // Passing each menu ID as a set of Ids because each
-            // menu should be considered as top level destinations.
-            val appBarConfiguration = AppBarConfiguration(
-                setOf(
-                    R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
-                )
-            )
-            setupActionBarWithNavController(navController, appBarConfiguration)
-            navView.setupWithNavController(navController)
-
-            try {
-                mSocket = IO.socket("http://192.168.1.6:3000")
-                mSocket.connect()
-                mSocket.emit("switchRelay", "abcxyz")
-            } catch (e: URISyntaxException) {
-            }
-            mSocket.on("alert", Emitter.Listener {
-                val intent = Intent(this, SignUpActivity::class.java)
-                startActivityForResult(intent, 200)
-            })
 
             FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
                 if (!task.isSuccessful) {
@@ -115,6 +62,37 @@ class MainActivity : AppCompatActivity() {
                 }
             })
 
+            mDatabase.child("Room").get().addOnSuccessListener {
+                roomList = mutableListOf()
+                (it.value as Map<String, *>).forEach { roomData ->
+                    val room = Room(roomData.key)
+                    room.deviceList = mutableListOf()
+                    (roomData.value as Map<String, *>).forEach { deviceData ->
+                        room.deviceList.add(parseDeviceFromDB(room.name, deviceData))
+                    }
+                    roomList.add(room)
+                }
+
+                binding = ActivityMainBinding.inflate(layoutInflater)
+                setContentView(binding.root)
+                val navView: BottomNavigationView = binding.navView
+
+                val navController = findNavController(R.id.nav_host_fragment_activity_main)
+                // Passing each menu ID as a set of Ids because each
+                // menu should be considered as top level destinations.
+                val appBarConfiguration = AppBarConfiguration(
+                    setOf(
+                        R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
+                    )
+                )
+                setupActionBarWithNavController(navController, appBarConfiguration)
+                navView.setupWithNavController(navController)
+
+            }.addOnFailureListener {
+                Log.w("FIREBASE", "loadPost:onCancelled", it)
+            }
+
+            Toast.makeText(this, "Welcome ${currentUser.email}", Toast.LENGTH_SHORT).show()
 
         }
 

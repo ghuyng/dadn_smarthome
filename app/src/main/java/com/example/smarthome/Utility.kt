@@ -1,7 +1,9 @@
 package com.example.smarthome
 
 import android.content.Context
+import android.util.Log
 import androidx.core.content.ContextCompat
+import org.json.JSONObject
 
 class Utility(var context: Context) {
     fun getDeviceIcon(device: Device) =
@@ -23,4 +25,15 @@ class Utility(var context: Context) {
             DeviceType.Airconditioner -> ContextCompat.getDrawable(context, R.drawable.img_airconditioner)
             else -> ContextCompat.getDrawable(context, R.drawable.ic_settings)
         }
+
+    fun turnOnOffDevice(device: Device) {
+        var apiController = APIController(context)
+        apiController.jsonObjectPOST("/turn-device", JSONObject("""{
+            |"room": "${device.room}",
+            |"device": "${device.name}",
+            |"data": ${!device.status}
+            |}""".trimMargin())) { res ->
+            Log.d("POST Request", res.toString())
+        }
+    }
 }
