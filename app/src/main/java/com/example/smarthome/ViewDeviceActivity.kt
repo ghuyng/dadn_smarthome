@@ -2,20 +2,42 @@ package com.example.smarthome
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
+import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.textview.MaterialTextView
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import org.json.JSONObject
 
 class ViewDeviceActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
 
     private lateinit var mqttService: MQTTService
-    private var apiController = APIController(this)
+    private var utility = Utility(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val device = intent.getSerializableExtra("device") as Device
+        val mDatabase = Firebase.database.reference
+        mDatabase.child("Room/${device.room}/${device.name}/Status").addValueEventListener(object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                Log.d("FIREBASE", snapshot.value.toString())
+                device.status = snapshot.value as Boolean
+                findViewById<TextView>(R.id.device_status).text = getDeviceStatus(device)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.w("FIREBASE", "loadPost:onCancelled", error.toException())
+            }
+
+        })
         setContentView(R.layout.activity_view_device)
 
         findViewById<ImageButton>(R.id.back_button).setOnClickListener { onBackPressed() }
@@ -23,30 +45,29 @@ class ViewDeviceActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListene
         findViewById<ImageButton>(R.id.power_icon_button).setOnClickListener { changeDeviceStatus()}
         findViewById<ImageButton>(R.id.setting_button).setOnClickListener{ showDeviceSettingPopup() }
 
-        val device = intent.getSerializableExtra("device") as Device
-        mqttService = MainActivity.mqttService
         findViewById<TextView>(R.id.device_room).text = device.room
         findViewById<TextView>(R.id.device_name).text = device.name
-        findViewById<TextView>(R.id.device_status).text = if (device.status) "ON" else "OFF"
-        findViewById<ImageView>(R.id.device_image).setImageDrawable(Utility(this).getDeviceImage(device))
+        findViewById<ImageView>(R.id.device_image).setImageDrawable(utility.getDeviceImage(device))
+
+        if (device.deviceType == DeviceType.Door) {
+            findViewById<TextView>(R.id.automode_text).visibility = View.GONE
+            findViewById<MaterialTextView>(R.id.device_auto_mode).visibility = View.GONE
+        }
     }
 
     private fun changeDeviceStatus(){
         val device = intent.getSerializableExtra("device") as Device
-        device.status = !device.status
-        val statusStr: String = if (device.status) "ON" else "OFF"
-        findViewById<TextView>(R.id.device_status).text = statusStr
-//        mqttService.sendDataMQTT(makeMessage(device, (if (device.status) 1 else 0).toString()).toString())
+        utility.turnOnOffDevice(device)
+        findViewById<TextView>(R.id.device_status).text = getDeviceStatus(intent.getSerializableExtra("device") as Device)
 
-        apiController.jsonObjectGET("/"){ res ->
-            println(res.toString())
+
+    }
+
+    private fun getDeviceStatus(device: Device): String {
+        if (device.deviceType == DeviceType.Door) {
+            return if (device.status) "LOCKED" else "UNLOCKED"
         }
-
-        apiController.jsonObjectPOST("/turn-device", makeMessage(device,
-            (if (device.status) 1 else 0).toString())){ res ->
-            println(res.toString())
-        }
-
+        return if (device.status) "ON" else "OFF"
     }
 
     private fun makeMessage(device: Device, data: String): JSONObject{

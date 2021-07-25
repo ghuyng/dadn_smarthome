@@ -59,14 +59,14 @@ class ListRoomRecyclerViewAdapter(private val roomList : List<Room>): RecyclerVi
         }
     }
 
-    fun viewDeviceList(room: Room, view: View){
-        val deviceList = room.getDevices()
-        val deviceAdapter = ListDeviceRecyclerViewAdapter(deviceList)
-        val root = view.rootView
-        val deviceRecyclerView: RecyclerView = root.findViewById(R.id.recycler_view_device)
-        deviceRecyclerView.layoutManager = GridLayoutManager(root.context, 2)
-        deviceRecyclerView.adapter = deviceAdapter
-    }
+     fun viewDeviceList(room: Room, view: View){
+         val deviceList = room.deviceList
+         val deviceAdapter = ListDeviceRecyclerViewAdapter(deviceList)
+         val root = view.rootView
+         val deviceRecyclerView: RecyclerView = root.findViewById(R.id.recycler_view_device)
+         deviceRecyclerView.layoutManager = GridLayoutManager(root.context, 2)
+         deviceRecyclerView.adapter = deviceAdapter
+     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_room_layout, parent, false)
@@ -74,7 +74,7 @@ class ListRoomRecyclerViewAdapter(private val roomList : List<Room>): RecyclerVi
     }
 
     override fun onBindViewHolder(holder: RoomViewHolder, position: Int) {
-        holder.title.text = roomList[position].getName()
+        holder.title.text = roomList[position].name
         if (position == 0 && lastCheckedTitle == null) {
             holder.title.isSelected = true
             lastCheckedTitle = holder.title
