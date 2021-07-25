@@ -22,7 +22,7 @@ class DevicereportActivity : AppCompatActivity() {
         val str:String = intent.getStringExtra("value").toString()
         deviceName.text =str
         if (str == "Fans") {
-            val toast = Toast.makeText(this, "Viewing fans consumption",Toast.LENGTH_LONG)
+            val toast = Toast.makeText(this, "View fans consumption",Toast.LENGTH_SHORT)
             toast.show()
             deviceImage.setImageResource(R.drawable.img_fan)
 
@@ -37,8 +37,8 @@ class DevicereportActivity : AppCompatActivity() {
             listView.adapter = MyAdapter(this,R.layout.row,list)
 
         }
-        if (str == "Air-conditioners") {
-            val toast = Toast.makeText(this, "Viewing doors consumption",Toast.LENGTH_LONG)
+        if (str == "Door") {
+            val toast = Toast.makeText(this, "View doors consumption",Toast.LENGTH_LONG)
             toast.show()
             deviceImage.setImageResource(R.drawable.img_door)
             var listView = findViewById<ListView>(R.id.lvRoom)
@@ -52,7 +52,7 @@ class DevicereportActivity : AppCompatActivity() {
             listView.adapter = MyAdapter(this,R.layout.row,list)
         }
         if (str == "Lights") {
-            val toast = Toast.makeText(this, "Viewing lights consumption",Toast.LENGTH_LONG)
+            val toast = Toast.makeText(this, "View lights consumption",Toast.LENGTH_LONG)
             toast.show()
             deviceImage.setImageResource(R.drawable.img_light)
 

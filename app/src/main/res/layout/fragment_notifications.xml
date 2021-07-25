@@ -50,7 +50,7 @@
             android:textColor="@color/black"
             android:background="@color/orange"
             android:layout_marginTop="20dp"
-            android:text="AIR-CONDITIONERS"
+            android:text="DOOR"
             />
         <Button
             android:layout_width="match_parent"

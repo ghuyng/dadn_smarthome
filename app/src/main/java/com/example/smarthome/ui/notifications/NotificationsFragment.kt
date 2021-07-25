@@ -45,7 +45,7 @@ class NotificationsFragment : Fragment() {
         btnAC.setOnClickListener {
             activity?.let{
                 val intent = Intent (it, DevicereportActivity::class.java)
-                intent.putExtra("value","Air-conditioners")
+                intent.putExtra("value","Door")
                 it.startActivity(intent)
             }
         }
