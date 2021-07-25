@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    tools:context=".ViewNotificationsActivity">
+
+    <ImageView
+        android:id="@+id/image_ic1"
+        android:layout_width="180dp"
+        android:layout_height="100dp"
+        android:contentDescription="@string/warning_ic"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@+id/notice_box"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/warning_ic"
+        tools:layout_marginTop="200dp" />
+
+    <TextView
+        android:id="@+id/notice_box"
+        android:layout_width="389dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/light_gray"
+        android:gravity="center"
+        android:text="@string/message_warning"
+        android:textColor="@color/purple_700"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.314" />
+
+    <ImageView
+        android:id="@+id/ic_warn1"
+        android:layout_width="54dp"
+        android:layout_height="35dp"
+        android:contentDescription="@string/warning_ic"
+        android:gravity="start"
+        app:layout_constraintStart_toStartOf="@+id/notice_box"
+        app:layout_constraintTop_toTopOf="@+id/notice_box"
+        app:srcCompat="@drawable/ic_warning" />
+    <ImageView
+        android:id="@+id/ic_warn2"
+        android:layout_width="54dp"
+        android:layout_height="35dp"
+        android:contentDescription="@string/warning_ic"
+        android:gravity="end"
+        app:layout_constraintEnd_toEndOf="@+id/notice_box"
+        app:layout_constraintTop_toTopOf="@+id/notice_box"
+        app:srcCompat="@drawable/ic_warning"
+        />
+    <ImageView
+        android:id="@+id/ic_warn3"
+        android:layout_width="54dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="1dp"
+        android:contentDescription="@string/warning_ic"
+        android:gravity="start"
+        app:layout_constraintBottom_toBottomOf="@+id/notice_box"
+        app:layout_constraintStart_toStartOf="@+id/notice_box"
+        app:srcCompat="@drawable/ic_warning" />
+    <ImageView
+        android:id="@+id/ic_warn4"
+        android:layout_width="54dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="164dp"
+        android:layout_marginEnd="4dp"
+        android:contentDescription="@string/warning_ic"
+        android:gravity="end"
+        app:layout_constraintEnd_toEndOf="@+id/notice_box"
+        app:layout_constraintTop_toTopOf="@+id/notice_box"
+        app:srcCompat="@drawable/ic_warning" />
+
+
+    <Button
+        android:id="@+id/btn_stop"
+        android:layout_width="147dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="40dp"
+        android:background="@drawable/rectangle"
+        android:text="@string/stop_alert"
+        android:textSize="17sp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notice_box"
+        app:layout_constraintVertical_bias="0.386" />
+
+    <Button
+        android:id="@+id/btn_continue"
+        android:layout_width="147dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/rectangle"
+        android:text="@string/continue_alert"
+        android:textSize="17sp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notice_box"
+        app:layout_constraintVertical_bias="0.386" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+

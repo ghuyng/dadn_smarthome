@@ -5,11 +5,11 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.ui.AppBarConfiguration
 import com.example.smarthome.databinding.ActivitySignUpBinding
 import com.google.firebase.auth.FirebaseAuth
-import android.widget.Toast
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -63,16 +63,18 @@ class SignUpActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d("SignUp", "createUserWithEmail:success")
                     //intent.putExtra("NewUserName", user_name.toString())
-                    intent.putExtra("NewUserEmail", email)
-                    intent.putExtra("NewUserPassword", password)
+//                    intent.putExtra("NewUserEmail", email)
+//                    intent.putExtra("NewUserPassword", password)
                     //intent.putExtra("NewUserPasswordRetype", user_passwordRe.toString())
                     Toast.makeText(baseContext, "Account created.",
                         Toast.LENGTH_SHORT).show()
+                    intent = Intent(baseContext, MainActivity::class.java)
+                    startActivity(intent)
                     finish()
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w("SignUp", "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(baseContext, "Authentication failed.",
+                    Toast.makeText(baseContext, "Authentication failed.\n" + task.exception?.message,
                         Toast.LENGTH_SHORT).show()
                 }
             }
