@@ -9,6 +9,4 @@ class ViewNotificationsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_view_notice)
 
     }
-
-
 }

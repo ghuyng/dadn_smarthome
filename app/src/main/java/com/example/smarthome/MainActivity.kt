@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         if (currentUser == null) {
             val intent = Intent(this, SignInActivity::class.java)
 //            startActivityForResult(intent, 123)
-            startActivity(intent)
+//            startActivity(intent)
             finish()
         }
         else {
