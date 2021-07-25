@@ -1,4 +1,7 @@
 package com.example.smarthome.model
 
-class RoomReport {
+import java.io.Serializable
+
+class RoomReport (val roomName: String, val Hour: String){
+
 }
