@@ -32,7 +32,12 @@ class SignInActivity : AppCompatActivity() {
             Log.d("SignIn", "onClick: called")
             Log.d("SignIn", "Email: ${user_email.text.toString()}")
             Log.d("SignIn", "Password: ${user_password.text.toString()}")
-            signIn(user_email.text.toString(), user_password.text.toString())
+            if (user_email.text.toString() != "" && user_password.text.toString() != "") {
+                signIn(user_email.text.toString(), user_password.text.toString())
+            } else {
+                Toast.makeText(baseContext, "Please fill in Email and Password",
+                    Toast.LENGTH_SHORT).show()
+            }
         }
         textViewSignUp.setOnClickListener {
             Log.d("SignUp", "onClick: called")

@@ -23,7 +23,7 @@
         app:srcCompat="@drawable/ic_settings"/>
 
     <Button
-        android:id="@+id/btnSignUp_home"
+        android:id="@+id/btnSignOut_home"
         android:layout_width="100dp"
         android:layout_height="40dp"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
@@ -32,7 +32,7 @@
         android:background="@drawable/rectangle"
         android:text="@string/sign_out_btn"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="12sp"
         android:gravity="center"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/text_home"
