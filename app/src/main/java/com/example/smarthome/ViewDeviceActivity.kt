@@ -94,6 +94,7 @@ class ViewDeviceActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListene
                 val i = Intent(this, SetTurnOnOffTimeActivity::class.java)
                 val device = intent.getSerializableExtra("device") as Device
                 i.putExtra("device", device)
+                finish()
                 startActivity(i)
 //                Toast.makeText(this, ,"Set power selected", Toast.LENGTH_SHORT).show()
                 true
@@ -103,6 +104,7 @@ class ViewDeviceActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListene
                 val device = intent.getSerializableExtra("device") as Device
                 i.putExtra("device", device)
                 startActivity(i)
+                finish()
                 true
             }
             else -> false

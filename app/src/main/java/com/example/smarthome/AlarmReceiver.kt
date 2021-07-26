@@ -6,6 +6,7 @@ import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
@@ -18,28 +19,24 @@ class AlarmReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
         // Is triggered when alarm goes off, i.e. receiving a system broadcast
-        var apiController = context?.let { APIController(it) }
         var device = intent?.getSerializableExtra("device") as Device
 
-        if (intent?.action == "TURN_ON_ACTION") {
-            device.status = true
-            Toast.makeText(context, "", Toast.LENGTH_SHORT).show()
-        }
-        else if (intent?.action == "TURN_OFF_ACTION"){
-            device.status = false
-        }
-
         //make message
-        apiController?.jsonObjectGET("/"){ res ->
-            println(res.toString())
-        }
+//        var utility = context?.let { Utility(it) }
+//        utility?.turnOnOffDevice(device)
+//        if (intent?.action == "TURN_ON_ACTION") {
+//            device.status = true
+//            Toast.makeText(context, "", Toast.LENGTH_SHORT).show()
+//        }
+//        else if (intent?.action == "TURN_OFF_ACTION"){
+//            device.status = false
+//        }
 
-        apiController?.jsonObjectPOST("/turn-device", makeMessage(device,
-            (if (device.status) 1 else 0).toString())){ res ->
-            println(res.toString())
+        val i = Intent(context, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
-
-        val pendingIntent = PendingIntent.getActivity(context!!, 0, intent, 0)
+        Log.d("ALARM", intent.action.toString())
+        val pendingIntent = PendingIntent.getActivity(context!!, 0, i, 0)
 
         val builder = NotificationCompat.Builder(context!!, "turnonoffnoti")
             .setSmallIcon(R.drawable.ic_notifications_black_24dp)
