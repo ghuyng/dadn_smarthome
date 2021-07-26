@@ -28,8 +28,7 @@ const { admin } = require('./firebase-config')
 const { defaultLight, defaultDoor} = require('./track-device')
 
 const database = admin.database()
-var registrationtoken = 'exDJ9ZTZRk6AUiwCtNJ82C:APA91bHb_GmqllUFihxRRfD-GqIgbH_LEhUWquyclZlUgAfn9qFXTW7zFEpOXu1Cg_wIq8wHglO6zG-cIkmGgIKog75KXuPpG7iPvY8b0fpr0Bs8CiR2B38mCHxMc7Hqz12jnGaJ9DR1'
-// var registrationtoken = ''
+var registrationtoken = ''
 const sendAlert = (regToken => {
   const notification_options = {
     priority: "high",
@@ -120,7 +119,7 @@ function changeRelay(message){
       if (snapshot.exists()) {
         var timeList = snapshot.val()
         var currentTime = new Date()
-        timeList.push(`${currentTime.getFullYear()}-${currentTime.getMonth()}-${currentTime.getDate()} ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`)
+        timeList.push(`${currentTime.getFullYear()}-${currentTime.getMonth() + 1}-${currentTime.getDate()} ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`)
         dbRef.child(`${message.data? "On": "Off"}`).set(timeList)
         console.log(timeList);
       } else {
