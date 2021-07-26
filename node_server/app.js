@@ -53,3 +53,10 @@ app.post('/set-registrationtoken', (req, res) => {
     message: "good"
   })
 })
+
+app.get('/stop-alert', (req, res) => {
+  clientMqtt.changeAlert(0)
+  res.status(200).json({
+    message: "good"
+  })
+})

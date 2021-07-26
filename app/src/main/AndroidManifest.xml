@@ -60,6 +60,17 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".ViewNotificationsActivity"
+            android:launchMode="singleTask"
+            android:taskAffinity=""
+            android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="VIEW_NOTIFICATION"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <service
             android:name=".SMHFirebaseMessagingService"
             android:exported="false">

@@ -1,10 +1,10 @@
 const { json } = require('express')
 const mqtt = require('mqtt')
 
-// const uname = "CSE_BBC"
-// const uname1 = "CSE_BBC1"
-const uname = "ghuyng"
-const uname1 = "ghuyng"
+const uname = "CSE_BBC"
+const uname1 = "CSE_BBC1"
+// const uname = "ghuyng"
+// const uname1 = "ghuyng"
 const clientBBC = mqtt.connect('mqtts://io.adafruit.com:8883',{
   username: uname,
   password: "",
@@ -28,7 +28,8 @@ const { admin } = require('./firebase-config')
 const { defaultLight, defaultDoor} = require('./track-device')
 
 const database = admin.database()
-var registrationtoken = ''
+var registrationtoken = 'exDJ9ZTZRk6AUiwCtNJ82C:APA91bHb_GmqllUFihxRRfD-GqIgbH_LEhUWquyclZlUgAfn9qFXTW7zFEpOXu1Cg_wIq8wHglO6zG-cIkmGgIKog75KXuPpG7iPvY8b0fpr0Bs8CiR2B38mCHxMc7Hqz12jnGaJ9DR1'
+// var registrationtoken = ''
 const sendAlert = (regToken => {
   const notification_options = {
     priority: "high",
@@ -37,7 +38,8 @@ const sendAlert = (regToken => {
   const message = {
     notification: {
       title: 'SmartHome ALERT',
-      body: 'ALERT!! YOUR DOOR WAS OPENED'
+      body: 'ALERT!! YOUR DOOR WAS OPENED',
+      click_action: 'VIEW_NOTIFICATION'
     }
   };
   admin.messaging().sendToDevice(regToken, message, notification_options)
@@ -62,21 +64,13 @@ clientBBC.on('connect', ()=>{
   clientBBC.subscribe(buzzerTopic)
 })
 
-clientBBC.on('message', async (topic, message) =>{
+clientBBC.on('message', (topic, message) =>{
   console.log(`topic : ${topic}, message : ${message}`)
-  if (defaultDoor.status && topic == magneticTopic){
-    console.log("here")
-    jsonObj = {
-      "id":"2",
-      "name":"SPEAKER",
-      "data":"500",
-      "unit":""
-    }
-    clientBBC.publish(buzzerTopic, JSON.stringify(jsonObj))
+  const msg = JSON.parse(message)
+  if (defaultDoor.status && topic == magneticTopic && msg["data"] == "1"){
+    console.log("heare")
+    changeAlert(1000)
     sendAlert(registrationtoken)
-    // for (const socket of sockets){
-    //   socket.emit("alert")
-    // }
   }
 })
 
@@ -105,6 +99,7 @@ clientBBC1.on('message', (topic, message) =>{
 })
 
 function changeRelay(message){
+  if (message.type != 'Door'){
     clientBBC1
       .publish(relayTopic, JSON.stringify({
         "id":"11",
@@ -117,25 +112,37 @@ function changeRelay(message){
 
           return
         }
-        const dbRef = database.ref(`Room/${message.room}/${message.device}`)
-        dbRef.child('Status').set(message.data)
-        dbRef.child(`${message.data? "On": "Off"}`).get().then((snapshot) => {
-          if (snapshot.exists()) {
-            var timeList = snapshot.val()
-            var currentTime = new Date()
-            timeList.push(`${currentTime.getFullYear()}-${currentTime.getMonth()}-${currentTime.getDate()} ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`)
-            dbRef.child(`${message.data? "On": "Off"}`).set(timeList)
-            console.log(timeList);
-          } else {
-            console.log("No data available");
-          }
-        }).catch((error) => {
-          console.error(error);
-        });
       })
+  }
+    const dbRef = database.ref(`Room/${message.room}/${message.device}`)
+    dbRef.child('Status').set(message.data)
+    dbRef.child(`${message.data? "On": "Off"}`).get().then((snapshot) => {
+      if (snapshot.exists()) {
+        var timeList = snapshot.val()
+        var currentTime = new Date()
+        timeList.push(`${currentTime.getFullYear()}-${currentTime.getMonth()}-${currentTime.getDate()} ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`)
+        dbRef.child(`${message.data? "On": "Off"}`).set(timeList)
+        console.log(timeList);
+      } else {
+        console.log("No data available");
+      }
+    }).catch((error) => {
+      console.error(error);
+    });
+}
+
+function changeAlert(val) {
+    var jsonObj = {
+      "id":"2",
+      "name":"SPEAKER",
+      "data": val.toString(),
+      "unit":""
+    }
+    clientBBC.publish(buzzerTopic, JSON.stringify(jsonObj))
 }
 
 module.exports = {
     changeRelay,
-    saveRegToken
+    saveRegToken,
+    changeAlert
 }

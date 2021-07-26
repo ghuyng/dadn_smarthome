@@ -66,12 +66,12 @@ class SMHFirebaseMessagingService : FirebaseMessagingService(){
     }
 
     private fun sendNotification(messageBody: String?) {
-        val intent = Intent(this, SignUpActivity::class.java).apply {
+        val intent = Intent(this, ViewNotificationsActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         }
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-            PendingIntent.FLAG_UPDATE_CURRENT)
+            PendingIntent.FLAG_ONE_SHOT)
 
         val channelId = getString(R.string.default_notification_channel_id)
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
@@ -89,6 +89,7 @@ class SMHFirebaseMessagingService : FirebaseMessagingService(){
                 PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT)
             ))
 
+
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         // Since android Oreo notification channel is needed.
@@ -100,7 +101,7 @@ class SMHFirebaseMessagingService : FirebaseMessagingService(){
         }
 
         with(NotificationManagerCompat.from(this)) {
-            notificationManager.notify(0, notificationBuilder.build())
+            notify(0, notificationBuilder.build())
         }
     }
 }

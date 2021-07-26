@@ -94,6 +94,13 @@ class MainActivity : AppCompatActivity() {
 
             Toast.makeText(this, "Welcome ${currentUser.email}", Toast.LENGTH_SHORT).show()
 
+            if (intent.extras != null) {
+                for (key in intent.extras!!.keySet()) {
+                    val value = intent.extras!![key]
+                    Log.d("NOTI MAIN", "Key: $key Value: $value")
+                }
+            }
+
         }
 
     }

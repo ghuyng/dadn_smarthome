@@ -31,6 +31,7 @@ class Utility(var context: Context) {
         apiController.jsonObjectPOST("/turn-device", JSONObject("""{
             |"room": "${device.room}",
             |"device": "${device.name}",
+            |"type": "${device.deviceType.name}",
             |"data": ${!device.status}
             |}""".trimMargin())) { res ->
             Log.d("POST Request", res.toString())
