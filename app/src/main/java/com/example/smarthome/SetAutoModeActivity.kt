@@ -11,14 +11,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
+
 class SetAutoModeActivity : AppCompatActivity() {
     private lateinit var device : Device
     private var lightValue = 0
-    private var database = Firebase.database.reference
+    private lateinit var database : DatabaseReference
 
     private lateinit var confirm : TextView
     private lateinit var setDefault : TextView
@@ -39,9 +41,10 @@ class SetAutoModeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_set_auto_mode)
         findViewById<ImageButton>(R.id.setting_auto_back_button).setOnClickListener { onBackPressed()}
+        device = intent.getSerializableExtra("device") as Device
+        database = Firebase.database.reference.child("Room").child(device.room).child(device.name)
         setUpDatabase()
 
-        device = intent.getSerializableExtra("device") as Device
         confirm = findViewById<TextView>(R.id.setting_auto_confirm)
         setDefault = findViewById<TextView>(R.id.setting_auto_set_default)
         stateButton = findViewById<SwitchCompat>(R.id.setting_auto_state_switch)
@@ -64,17 +67,17 @@ class SetAutoModeActivity : AppCompatActivity() {
             Toast.makeText(this, "Set Default turn on value is 100, turn off value is 700!!!", Toast.LENGTH_SHORT).show()
         }
         confirm.setOnClickListener {
-            changeDeviceSensorValue()
-            Toast.makeText(this,"Auto mode with turn on: " + turnOnSeekBar.progress + ", turn off: " + turnOffSeekBar.progress + ".Confirm!!!", Toast.LENGTH_SHORT).show()
+            if (changeDeviceSensorValue(stateButton.isChecked)) {
+                Toast.makeText(this,"Auto mode with turn on: " + turnOnSeekBar.progress + ", turn off: " + turnOffSeekBar.progress + ".Confirm!!!", Toast.LENGTH_SHORT).show()
+            }
         }
 
         setSeekBarTracking()
 
         //set on/off automode
-        stateButton.setOnCheckedChangeListener { buttonView, isChecked ->
+        stateButton.setOnCheckedChangeListener { _, isChecked ->
             if(isChecked){
                 displayWhenChangeMode(true)
-                Toast.makeText(this,"Auto mode turned on!!", Toast.LENGTH_SHORT).show()
             }
             else {
                 displayWhenChangeMode(false)
@@ -90,6 +93,7 @@ class SetAutoModeActivity : AppCompatActivity() {
             SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seek: SeekBar, progress: Int, fromUser: Boolean) {
                 // write custom code for progress is changed
+                turnOnUpperBound.text = progress.toString()
             }
 
             override fun onStartTrackingTouch(seek: SeekBar) {
@@ -99,7 +103,6 @@ class SetAutoModeActivity : AppCompatActivity() {
             override fun onStopTrackingTouch(seek: SeekBar) {
                 // write custom code for progress is stopped
                 lightValue = seek.progress
-                Toast.makeText(this@SetAutoModeActivity,"Sensor level: " + lightValue, Toast.LENGTH_SHORT).show()
             }
         })
 
@@ -108,6 +111,7 @@ class SetAutoModeActivity : AppCompatActivity() {
             SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seek: SeekBar, progress: Int, fromUser: Boolean) {
                 // write custom code for progress is changed
+                turnOffUpperBound.text = progress.toString()
             }
 
             override fun onStartTrackingTouch(seek: SeekBar) {
@@ -117,7 +121,6 @@ class SetAutoModeActivity : AppCompatActivity() {
             override fun onStopTrackingTouch(seek: SeekBar) {
                 // write custom code for progress is stopped
                 lightValue = seek.progress
-                Toast.makeText(this@SetAutoModeActivity,"Sensor level: " + lightValue, Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -140,19 +143,9 @@ class SetAutoModeActivity : AppCompatActivity() {
         turnOffSeekBar.visibility = value
     }
 
-    //change device's auto mode state on firebase
-    private fun changeDeviceAutoMode(b: Boolean) {
-        if (b) {
-            changeDeviceSensorValue(false)
-        }
-        else {
-            turnOnSeekBar.progress = 0
-            database.child("Room").child(device.room).child(device.name).child("Limit").setValue(0)
-        }
-    }
 
     //send message
-    private fun changeDeviceSensorValue(b: Boolean = true) {
+    private fun changeDeviceSensorValue(b: Boolean = true) : Boolean{
         var turnOnVal = turnOnSeekBar.progress
         var turnOffVal = turnOffSeekBar.progress
 
@@ -164,11 +157,16 @@ class SetAutoModeActivity : AppCompatActivity() {
         //check and set limit value to db
         if(turnOnVal > turnOffVal){
             Toast.makeText(this, "You should set Turn Off Value larger than Turn On Value", Toast.LENGTH_SHORT).show()
-            return
+            return false
         }
 
-        database.child("Room").child(device.room).child(device.name).child("TurnOnValue").setValue(turnOnVal)
-        database.child("Room").child(device.room).child(device.name).child("TurnOffValue").setValue(turnOffVal)
+        val childUpdates = hashMapOf<String, Any>(
+            "/TurnOnValue" to turnOnVal,
+            "/TurnOffValue" to turnOffVal
+        )
+        database.updateChildren(childUpdates)
+
+        return true
     }
 
     //get data from database
@@ -177,10 +175,8 @@ class SetAutoModeActivity : AppCompatActivity() {
         //get data from realtime database
         var getData = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val roomName = device.room
-                val deviceName = device.name
-                var deviceTurnOnValue = snapshot.child("Room").child(roomName).child(deviceName).child("TurnOnValue").value
-                var deviceTurnOffValue = snapshot.child("Room").child(roomName).child(deviceName).child("TurnOffValue").value
+                var deviceTurnOnValue = snapshot.child("TurnOnValue").value
+                var deviceTurnOffValue = snapshot.child("TurnOffValue").value
                 //check if automode on device is on or off
                 var autoModeState = "On"
                 if (deviceTurnOnValue.toString().toInt() == -1){

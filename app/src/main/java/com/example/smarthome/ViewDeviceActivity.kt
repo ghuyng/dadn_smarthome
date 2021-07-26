@@ -16,21 +16,34 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import org.json.JSONObject
 
 class ViewDeviceActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
 
     private lateinit var mqttService: MQTTService
     private var utility = Utility(this)
+    private lateinit var device: Device
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val device = intent.getSerializableExtra("device") as Device
         val mDatabase = Firebase.database.reference
-        mDatabase.child("Room/${device.room}/${device.name}/Status").addValueEventListener(object: ValueEventListener {
+        device = intent.getSerializableExtra("device") as Device
+        mDatabase.child("Room/${device.room}/${device.name}").addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                Log.d("FIREBASE", snapshot.value.toString())
-                device.status = snapshot.value as Boolean
+                Log.d("FIREBASE", snapshot.child("Status").value.toString())
+                device.status = snapshot.child("Status").value as Boolean
                 findViewById<TextView>(R.id.device_status).text = getDeviceStatus(device)
+
+                if (device.deviceType == DeviceType.Light) {
+                    val deviceTurnOffValue = snapshot.child("TurnOffValue").value
+                    val deviceTurnOnValue = snapshot.child("TurnOnValue").value
+                    var autoModeState = "ON"
+                    if (deviceTurnOnValue.toString().toInt() == -1) {
+                        autoModeState = "OFF"
+                    }
+                    if (deviceTurnOffValue.toString().toInt() == -1) {
+                        autoModeState = "OFF"
+                    }
+                    findViewById<TextView>(R.id.device_auto_mode).text = autoModeState
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -49,7 +62,7 @@ class ViewDeviceActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListene
         findViewById<TextView>(R.id.device_name).text = device.name
         findViewById<ImageView>(R.id.device_image).setImageDrawable(utility.getDeviceImage(device))
 
-        if (device.deviceType == DeviceType.Door) {
+        if (device.deviceType != DeviceType.Light) {
             findViewById<TextView>(R.id.automode_text).visibility = View.GONE
             findViewById<MaterialTextView>(R.id.device_auto_mode).visibility = View.GONE
         }
@@ -70,21 +83,14 @@ class ViewDeviceActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListene
         return if (device.status) "ON" else "OFF"
     }
 
-    private fun makeMessage(device: Device, data: String): JSONObject{
-        val message = JSONObject()
-        message.put("id", "11")
-        message.put("name", "RELAY")
-        message.put("data", data)
-        message.put("unit", "")
-        return message
-    }
-
-
     private fun showDeviceSettingPopup(){
         val button = findViewById<ImageButton>(R.id.setting_button)
         val popup = PopupMenu(this, button)
         popup.setOnMenuItemClickListener(this)
         popup.inflate(R.menu.setting_devide_popup_menu)
+        if (device.deviceType != DeviceType.Light) {
+            popup.menu.getItem(1).isVisible = false
+        }
         popup.show()
     }
 
@@ -94,7 +100,6 @@ class ViewDeviceActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListene
                 val i = Intent(this, SetTurnOnOffTimeActivity::class.java)
                 val device = intent.getSerializableExtra("device") as Device
                 i.putExtra("device", device)
-                finish()
                 startActivity(i)
 //                Toast.makeText(this, ,"Set power selected", Toast.LENGTH_SHORT).show()
                 true
@@ -104,7 +109,6 @@ class ViewDeviceActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListene
                 val device = intent.getSerializableExtra("device") as Device
                 i.putExtra("device", device)
                 startActivity(i)
-                finish()
                 true
             }
             else -> false
