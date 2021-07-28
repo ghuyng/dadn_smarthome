@@ -84,7 +84,7 @@ clientBBC1.on('connect', ()=>{
 
 clientBBC1.on('message', (topic, message) =>{
   console.log(`topic : ${topic}, message : ${message}`)
-  if (topic == lightSensorTopic){
+  if (topic == lightSensorTopic && defaultLight.lowLimit != -1 && defaultLight.highLimit != -1){
     const jsonObj = JSON.parse(message)
     if (jsonObj["data"] < defaultLight.lowLimit && !defaultLight.status
       || jsonObj["data"] > defaultLight.highLimit && defaultLight.status){
@@ -119,7 +119,10 @@ function changeRelay(message){
       if (snapshot.exists()) {
         var timeList = snapshot.val()
         var currentTime = new Date()
-        timeList.push(`${currentTime.getFullYear()}-${currentTime.getMonth() + 1}-${currentTime.getDate()} ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`)
+        const yyyy = currentTime.getFullYear()
+        const mm = String(currentTime.getMonth() + 1).padStart(2, '0')
+        const dd = String(currentTime.getDate()).padStart(2, '0')
+        timeList.push(`${yyyy}-${mm}-${dd} ${currentTime.toLocaleTimeString('en-GB')}`)
         dbRef.child(`${message.data? "On": "Off"}`).set(timeList)
         console.log(timeList);
       } else {

@@ -66,6 +66,9 @@ class ViewDeviceActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListene
             findViewById<TextView>(R.id.automode_text).visibility = View.GONE
             findViewById<MaterialTextView>(R.id.device_auto_mode).visibility = View.GONE
         }
+        if (device.deviceType == DeviceType.Door) {
+            findViewById<ImageButton>(R.id.setting_button).visibility = View.GONE
+        }
     }
 
     private fun changeDeviceStatus(){
