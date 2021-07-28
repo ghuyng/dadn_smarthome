@@ -38,7 +38,7 @@ class NotificationsFragment : Fragment() {
         btnFans.setOnClickListener {
             activity?.let{
                 val intent = Intent (it, DevicereportActivity::class.java)
-                intent.putExtra("value","Fans")
+                intent.putExtra("value","Fan")
                 it.startActivity(intent)
             }
         }
@@ -52,7 +52,7 @@ class NotificationsFragment : Fragment() {
         btnLights.setOnClickListener {
             activity?.let{
                 val intent = Intent (it, DevicereportActivity::class.java)
-                intent.putExtra("value","Lights")
+                intent.putExtra("value","Light")
                 it.startActivity(intent)
             }
         }
