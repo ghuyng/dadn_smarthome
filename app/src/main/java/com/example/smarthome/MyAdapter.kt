@@ -10,7 +10,6 @@ import com.example.smarthome.model.RoomReport
 import java.util.*
 import kotlin.collections.ArrayList
 
-
 class MyAdapter (var mCtx: Context, var resources:Int, var items:List<RoomReport>):ArrayAdapter<RoomReport>(mCtx,resources,items) {
     var roomReport : ArrayList<RoomReport> = ArrayList()
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {

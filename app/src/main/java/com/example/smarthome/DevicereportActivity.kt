@@ -93,7 +93,6 @@ class DevicereportActivity : AppCompatActivity() {
                 roomTime= roomTimeinMinute.toString()
                 list.add(RoomReport(room,roomTime + "Minutes"))
                 adapter.notifyDataSetChanged()
-                Log.d("livingRoomTime", room+ " "+ roomTime)
             }
             override fun onCancelled(databaseError: DatabaseError) {
                 Log.d("Fan", databaseError.message)
