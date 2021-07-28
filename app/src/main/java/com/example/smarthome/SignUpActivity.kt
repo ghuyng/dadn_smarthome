@@ -1,6 +1,5 @@
 package com.example.smarthome
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -26,7 +25,6 @@ class SignUpActivity : AppCompatActivity() {
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         auth = Firebase.auth
         setContentView(binding.root)
-        val contxt = this
         val buttonSignUp: Button = findViewById(R.id.btnSignUp)
         val buttonBack: Button = findViewById(R.id.btnBackToSignIn)
         val user_name: EditText = findViewById(R.id.textNameSignUp)
@@ -74,7 +72,7 @@ class SignUpActivity : AppCompatActivity() {
                     val data = Intent()
                     data.putExtra("NewUserEmail", email)
                     data.putExtra("NewUserPassword", password)
-                    setResult(RESULT_OK, data);
+                    setResult(RESULT_OK, data)
                     finish()
                 } else {
                     // If sign in fails, display a message to the user.
