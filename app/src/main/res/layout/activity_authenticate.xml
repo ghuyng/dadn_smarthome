@@ -80,7 +80,8 @@
             android:textSize="21sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:backgroundTint="#F46F3F"/>
 
         <EditText
             android:id="@+id/editTextTextPersonName2"
