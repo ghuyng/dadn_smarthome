@@ -3,6 +3,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Devices</string>
     <string name="title_notifications">Stats</string>
+    <string name="title_report">Report</string>
     <string name="doors">Doors</string>
     <string name="front_door">Front Door</string>
     <string name="back_door">Back Door</string>

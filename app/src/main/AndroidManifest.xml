@@ -26,6 +26,10 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/light_orange" />
+        <activity android:name=".DevicereportActivity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar">
+        </activity>
 
         <activity
             android:name=".SignUpActivity"
@@ -44,10 +48,8 @@
             android:name=".SetTurnOnOffTimeActivity"
             android:parentActivityName=".ViewDeviceActivity"
             android:theme="@style/Theme.MaterialComponents.NoActionBar" />
-        <activity android:name=".DevicereportActivity"/>
-        <activity android:name=".ReportActivity" />
-        <activity
-            android:name=".ViewDeviceActivity"
+
+        <activity android:name=".ViewDeviceActivity"
             android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.MaterialComponents.NoActionBar" />
         <activity
@@ -87,4 +89,5 @@
             android:exported="true">
         </receiver>
     </application>
+
 </manifest>
