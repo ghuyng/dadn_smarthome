@@ -33,36 +33,45 @@
             android:textSize="30sp"
             android:text="Details" />
 
-        <Button
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/ButtonFans"
-            android:padding="10dp"
-            android:textColor="@color/black"
-            android:background="@color/orange"
             android:layout_marginTop="20dp"
-            android:text="FANS" />
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/ButtonAC"
-            android:padding="10dp"
-            android:textColor="@color/black"
-            android:background="@color/orange"
-            android:layout_marginTop="20dp"
-            android:text="DOOR"
-            />
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
-            android:id="@+id/ButtonLights"
-            android:padding="10dp"
-            android:textColor="@color/black"
-            android:background="@color/orange"
-            android:text="LIGHTS"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10sp"
+            app:cardElevation="10sp"
+            >
+            <com.google.android.material.button.MaterialButton
+                style = "@style/Widget.MaterialComponents.Button.Icon"
+                app:icon="@drawable/ic_fan_icon"
+                app:iconTint="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/ButtonFans"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:background="@color/orange"
+                android:text="FANS" />
+        </androidx.cardview.widget.CardView>
 
-            />
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10sp"
+            app:cardElevation="10sp">
+            <com.google.android.material.button.MaterialButton
+                style = "@style/Widget.MaterialComponents.Button.Icon"
+                app:icon="@drawable/ic_light_icon"
+                app:iconTint="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/ButtonLights"
+                android:textColor="@color/black"
+                android:background="@color/orange"
+                android:text="LIGHTS"
+                />
+        </androidx.cardview.widget.CardView>
+
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
