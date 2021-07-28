@@ -7,6 +7,8 @@ import android.content.Intent
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 
 class AlarmReceiver : BroadcastReceiver() {
@@ -15,20 +17,29 @@ class AlarmReceiver : BroadcastReceiver() {
         // Is triggered when alarm goes off, i.e. receiving a system broadcast
         val bundle = intent?.getBundleExtra("extra")
         val device = bundle?.getSerializable("device") as Device
+        val database = Firebase.database.reference.child("Room").child(device.room).child(device.name)
+        var deviceScheduleMode : Int = 0
+        database.child("ScheduleMode").get().addOnSuccessListener {
+            deviceScheduleMode =  it.value.toString().toInt()
+        }
 
         //make message
         val utility = context?.let { Utility(it) }
         if (intent.action == "TURN_ON_DEVICE" && !device.status) {
             utility?.turnOnOffDevice(device)
+            deviceScheduleMode = deviceScheduleMode and SetTurnOnOffTimeActivity.ScheduleMode.TURN_OFF_DEVICE.ordinal
         }
         else if (intent.action == "TURN_OFF_DEVICE" && device.status){
             utility?.turnOnOffDevice(device)
-//            device.status = false
+            deviceScheduleMode = deviceScheduleMode and SetTurnOnOffTimeActivity.ScheduleMode.TURN_ON_DEVICE.ordinal
         }
+
+        database.child("ScheduleMode").setValue(deviceScheduleMode)
 
         val i = Intent(context, ViewDeviceActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
+
         Log.d("ALARM RECIEVER", device.room)
         i.putExtra("device", device)
         Log.d("ALARM", intent.action.toString())
@@ -37,7 +48,7 @@ class AlarmReceiver : BroadcastReceiver() {
         val builder = NotificationCompat.Builder(context!!, "turnonoffnoti")
             .setSmallIcon(R.drawable.ic_notifications_black_24dp)
             .setContentTitle("Smart Home App")
-            .setContentText("Device has turned On")
+            .setContentText("${device.name} has turned ${if (intent.action == "TURN_ON_DEVICE") "On" else "Off"}")
             .setAutoCancel(true)
             .setDefaults(NotificationCompat.DEFAULT_ALL)
             .setPriority(NotificationCompat.PRIORITY_HIGH)

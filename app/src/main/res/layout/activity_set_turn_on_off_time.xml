@@ -20,131 +20,57 @@
         android:id="@+id/setting_time_back_button"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginStart="34dp"
-        android:layout_marginTop="16dp"
         android:background="@android:color/transparent"
-        app:layout_constraintBottom_toTopOf="@+id/setting_time_blank_space"
-        app:layout_constraintEnd_toStartOf="@+id/setting_time_blank_space"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintBottom_toBottomOf="@+id/setting_time_tv_title"
+        app:layout_constraintEnd_toStartOf="@+id/setting_time_tv_title"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.256"
+        app:layout_constraintTop_toTopOf="@+id/setting_time_tv_title"
         app:srcCompat="@drawable/ic_backbtn" />
 
     <TextView
         android:id="@+id/setting_time_tv_title"
         android:layout_width="166dp"
         android:layout_height="57dp"
-        android:layout_marginStart="164dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="165dp"
         android:background="@drawable/rectangle"
         android:gravity="center"
         android:text="Schedule"
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/setting_time_back_button"
+        app:layout_constraintBottom_toTopOf="@+id/setting_time_blank_space"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/setting_time_back_button"
-        app:layout_constraintVertical_bias="0.72"></TextView>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="Schedule"
-        android:textColor="#FDA43C"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/setting_time_state_switch"
-        app:layout_constraintEnd_toStartOf="@+id/setting_time_state_switch"
-        app:layout_constraintHorizontal_bias="0.587"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/setting_time_state_switch"
-        app:layout_constraintVertical_bias="0.391"></TextView>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!--    <TextView-->
-<!--        android:id="@+id/setting_time_device_status"-->
-<!--        android:layout_width="100dp"-->
-<!--        android:layout_height="50dp"-->
-<!--        android:layout_marginTop="56dp"-->
-<!--        android:background="@drawable/rectangle"-->
-<!--        android:gravity="center"-->
-<!--        android:textSize="20sp"-->
-<!--        android:textStyle="bold"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/setting_time_tv_turn_on"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.7"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/setting_time_blank_space"-->
-<!--        app:layout_constraintVertical_bias="0.0"-->
-<!--        tools:text="On" />-->
-
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/setting_time_state_switch"
-        android:layout_width="67dp"
-        android:layout_height="62dp"
-
-        android:scaleX="1.4"
-        android:scaleY="1.4"
-        app:layout_constraintBottom_toTopOf="@+id/setting_time_tv_turn_on"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.578"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/setting_time_blank_space"
-        app:layout_constraintVertical_bias="0.509"
-        app:thumbTint="#FDA43C" />
+    <!--        android:id="@+id/setting_time_device_status"-->
+    <!--        android:layout_width="100dp"-->
+    <!--        android:layout_height="50dp"-->
+    <!--        android:layout_marginTop="56dp"-->
+    <!--        android:background="@drawable/rectangle"-->
+    <!--        android:gravity="center"-->
+    <!--        android:textSize="20sp"-->
+    <!--        android:textStyle="bold"-->
+    <!--        app:layout_constraintBottom_toTopOf="@+id/setting_time_tv_turn_on"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.7"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="@+id/setting_time_blank_space"-->
+    <!--        app:layout_constraintVertical_bias="0.0"-->
+    <!--        tools:text="On" />-->
 
     <TextView
         android:id="@+id/setting_time_blank_space"
         android:layout_width="fill_parent"
         android:layout_height="20dp"
-        android:layout_marginBottom="116dp"
 
+        android:layout_marginTop="50dp"
         android:background="#222222"
-        app:layout_constraintBottom_toTopOf="@+id/setting_time_tv_turn_on"
-        app:layout_constraintEnd_toEndOf="parent"></TextView>
-
-    <TextView
-        android:id="@+id/setting_time_tv_turn_on"
-        android:layout_width="fill_parent"
-        android:layout_height="80dp"
-        android:background="#222222"
-        android:gravity="center_vertical"
-        android:minLines="2"
-        android:padding="10dp"
-        android:text="Set time to power on \n 6:00 AM"
-        android:textColor="#FDA43C"
-        android:textSize="20dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/linearLayoutOn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.399"></TextView>
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/setting_time_tv_turn_off"
-        android:layout_width="fill_parent"
-        android:layout_height="80dp"
-
-        android:layout_marginBottom="276dp"
-        android:background="#222222"
-        android:gravity="center_vertical"
-        android:minLines="2"
-        android:padding="10dp"
-        android:text="Set time to power off \n 6:00 AM"
-        android:textColor="#FDA43C"
-        android:textSize="20dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/setting_time_tv_turn_on"
-        app:layout_constraintVertical_bias="0.0"></TextView>
 
     <TextView
         android:id="@+id/setting_time_confirm_button"
@@ -155,18 +81,91 @@
         android:text="Confirm"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/setting_time_tv_turn_off"
-        app:layout_constraintVertical_bias="0.596" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <LinearLayout
+        android:id="@+id/linearLayoutOn"
+        android:layout_width="0dp"
+        android:layout_height="83dp"
+        android:layout_marginTop="150dp"
+        android:background="#222222"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/setting_time_tv_turn_on"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+
+            android:layout_weight="6"
+            android:gravity="center_vertical"
+            android:minLines="2"
+            android:padding="10dp"
+            android:text="Set time to power off \n 6:00 AM"
+            android:textColor="#FDA43C"
+            android:textSize="20sp" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/setting_time_on_state_switch"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+
+            android:layout_weight="2"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:scaleX="1.4"
+            android:scaleY="1.4"
+            app:thumbTint="#FDA43C" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="83dp"
+        android:background="#222222"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setting_time_blank_space">
+
+        <TextView
+            android:id="@+id/setting_time_tv_turn_off"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+
+            android:layout_weight="6"
+            android:gravity="center_vertical"
+            android:minLines="2"
+            android:padding="10dp"
+            android:text="Set time to power on \n 6:00 AM"
+            android:textColor="#FDA43C"
+            android:textSize="20sp" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/setting_time_off_state_switch"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+
+            android:layout_weight="2"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:scaleX="1.4"
+            android:scaleY="1.4"
+            app:thumbTint="#FDA43C" />
+    </LinearLayout>
 
     app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/setting_time_tv_turn_off"
-        app:layout_constraintVertical_bias="0.447"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.498"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/setting_time_tv_turn_off"
+    app:layout_constraintVertical_bias="0.447"
 
 </androidx.constraintlayout.widget.ConstraintLayout>
