@@ -23,9 +23,9 @@ class MyAdapter (var mCtx: Context, var resources:Int, var items:List<RoomReport
         hoursText.text = mItem.Hour
         return view
     }
-    fun setItems(myList: ArrayList<RoomReport>) {
-        roomReport.clear()
-        roomReport.addAll(myList)
-        notifyDataSetChanged()
-    }
+//    fun setItems(myList: ArrayList<RoomReport>) {
+//        roomReport.clear()
+//        roomReport.addAll(myList)
+//        notifyDataSetChanged()
+//    }
 }

@@ -16,11 +16,11 @@ import java.text.SimpleDateFormat
 
 class DevicereportActivity : AppCompatActivity() {
     val list = ArrayList<RoomReport>()
-    lateinit var adapter: ArrayAdapter<RoomReport>
+    lateinit var adapter: MyAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_devicereport)
-        adapter = ArrayAdapter(this, R.layout.row, list)
+        adapter = MyAdapter(this, R.layout.row, list)
         val listView = findViewById<ListView>(R.id.lvRoom)
         listView.adapter = adapter
 
@@ -44,11 +44,11 @@ class DevicereportActivity : AppCompatActivity() {
             val toast = Toast.makeText(this, "View fans consumption",Toast.LENGTH_SHORT)
             toast.show()
             deviceImage.setImageResource(R.drawable.img_fan)
-//            roomConsumption(device,"Living Room")
-//            roomConsumption(device,"Kitchen")
+            roomConsumption(device,"Living Room")
+            roomConsumption(device,"Kitchen")
             roomConsumption(device,"Bedroom 1")
-//            roomConsumption(device,"Bedroom 2")
-//            roomConsumption(device,"Garage")
+            roomConsumption(device,"Bedroom 2")
+            roomConsumption(device,"Garage")
 
         }
 
@@ -86,8 +86,10 @@ class DevicereportActivity : AppCompatActivity() {
                 }
                 var roomTimeinMinute:Double = allDevice*0.0001/6.0
                 roomTime= roomTimeinMinute.toString()
-                list.add(RoomReport(room,roomTime + "Minutes"))
+                Log.d("roomDetail", room+roomTime)
                 adapter.notifyDataSetChanged()
+                list.add(RoomReport(room,roomTime + " "+"Minutes"))
+
             }
             override fun onCancelled(databaseError: DatabaseError) {
                 Log.d("Fan", databaseError.message)
