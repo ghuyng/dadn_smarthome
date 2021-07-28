@@ -11,10 +11,7 @@
 
 
     <LinearLayout
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:paddingVertical="100dp"
         android:padding="40dp"
         android:layout_width="match_parent"
         android:layout_marginTop="100dp"
@@ -71,6 +68,47 @@
                 android:text="LIGHTS"
                 />
         </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10sp"
+            app:cardElevation="10sp">
+            <com.google.android.material.button.MaterialButton
+                style = "@style/Widget.MaterialComponents.Button.Icon"
+                app:icon="@drawable/ic_air_conditioner"
+                app:iconTint="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/ButtonAC"
+                android:textColor="@color/black"
+                android:background="@color/orange"
+                android:text="AIR-CONDITIONERS"
+                />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10sp"
+            app:cardElevation="10sp">
+            <com.google.android.material.button.MaterialButton
+                style = "@style/Widget.MaterialComponents.Button.Icon"
+                app:icon="@drawable/ic_watch_tv"
+                app:iconTint="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/ButtonTV"
+                android:textColor="@color/black"
+                android:background="@color/orange"
+                android:text="TELEVISION"
+                />
+        </androidx.cardview.widget.CardView>
+
+
+
 
 
     </LinearLayout>

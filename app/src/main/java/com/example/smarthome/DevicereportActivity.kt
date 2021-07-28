@@ -57,6 +57,33 @@ class DevicereportActivity : AppCompatActivity() {
             val toast = Toast.makeText(this, "View lights consumption",Toast.LENGTH_LONG)
             toast.show()
             deviceImage.setImageResource(R.drawable.img_light)
+            roomConsumption(device,"Living Room")
+            roomConsumption(device,"Kitchen")
+            roomConsumption(device,"Bedroom 1")
+            roomConsumption(device,"Bedroom 2")
+            roomConsumption(device,"Garage")
+        }
+        //If AC was pressed
+        if (device == "Air-Conditioners") {
+            val toast = Toast.makeText(this, "View AC consumption",Toast.LENGTH_LONG)
+            toast.show()
+            deviceImage.setImageResource(R.drawable.img_airconditioner)
+            roomConsumption(device,"Living Room")
+            roomConsumption(device,"Kitchen")
+            roomConsumption(device,"Bedroom 1")
+            roomConsumption(device,"Bedroom 2")
+            roomConsumption(device,"Garage")
+        }
+        //If TV was pressed
+        if (device == "Television") {
+            val toast = Toast.makeText(this, "View TV consumption",Toast.LENGTH_LONG)
+            toast.show()
+            deviceImage.setImageResource(R.drawable.img_tv)
+            roomConsumption(device,"Living Room")
+            roomConsumption(device,"Kitchen")
+            roomConsumption(device,"Bedroom 1")
+            roomConsumption(device,"Bedroom 2")
+            roomConsumption(device,"Garage")
         }
 
     }
@@ -84,11 +111,11 @@ class DevicereportActivity : AppCompatActivity() {
                         allDevice+=timePerDevice
                     }
                 }
-                var roomTimeinMinute:Double = allDevice*0.0001/6.0
-                roomTime= roomTimeinMinute.toString()
-                Log.d("roomDetail", room+roomTime)
-                adapter.notifyDataSetChanged()
+                var roomTimeinMinute:Double =  allDevice*0.0001/6.0
+                roomTime= roomTimeinMinute.toInt().toString()
+                //Log.d("roomDetail", room+roomTime)
                 list.add(RoomReport(room,roomTime + " "+"Minutes"))
+                adapter.notifyDataSetChanged()
 
             }
             override fun onCancelled(databaseError: DatabaseError) {
