@@ -13,7 +13,6 @@ import com.example.smarthome.databinding.ActivityAuthenticateBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 
 class SignInActivity : AppCompatActivity() {
@@ -83,16 +82,9 @@ class SignInActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d("SignIn", "signInWithEmail:success")
                     // Get name of the user
-                    dbcontext = FirebaseDatabase.getInstance().reference.root
-                    dbcontext.child("Account").get().addOnSuccessListener { snapshot ->
-                        var username = snapshot.children.filter{it.child("Email").value == email}[0].child("Name").value.toString()
-                        Log.d("Username","is ${username}")
                         val intent = Intent()
-                        intent.putExtra("UserEmail", username)
-                        intent.putExtra("UserPassword", password)
                         setResult(Activity.RESULT_OK, intent)
                         finish()
-                    }
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w("SignIn", "signInWithEmail:failure", task.exception)
