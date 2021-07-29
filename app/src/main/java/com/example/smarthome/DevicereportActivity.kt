@@ -57,7 +57,7 @@ class DevicereportActivity : AppCompatActivity() {
 
         //If button Light was pressed
         if (device == "Light") {
-            val toast = Toast.makeText(this, "View lights consumption",Toast.LENGTH_LONG)
+            val toast = Toast.makeText(this, "View lights consumption",Toast.LENGTH_SHORT)
             toast.show()
             description.setText("Total active time of lights per room." )
 
@@ -70,7 +70,7 @@ class DevicereportActivity : AppCompatActivity() {
         }
         //If AC was pressed
         if (device == "Air-Conditioners") {
-            val toast = Toast.makeText(this, "View AC consumption",Toast.LENGTH_LONG)
+            val toast = Toast.makeText(this, "View AC consumption",Toast.LENGTH_SHORT)
             toast.show()
             description.setText("Total active time of air-conditioners per room." )
 
@@ -83,7 +83,7 @@ class DevicereportActivity : AppCompatActivity() {
         }
         //If TV was pressed
         if (device == "Television") {
-            val toast = Toast.makeText(this, "View TV consumption",Toast.LENGTH_LONG)
+            val toast = Toast.makeText(this, "View TV consumption",Toast.LENGTH_SHORT)
             toast.show()
             description.setText("Total active time of televisions per room." )
 
