@@ -11,7 +11,6 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import java.sql.Date
 import java.text.SimpleDateFormat
 
 class DevicereportActivity : AppCompatActivity() {
@@ -34,15 +33,19 @@ class DevicereportActivity : AppCompatActivity() {
 
     private fun addControls() {
         val deviceName: TextView = findViewById(R.id.device_name) as TextView
+        val description: TextView = findViewById(R.id.most_used) as TextView
         val deviceImage: ImageView = findViewById(R.id.device_image) as ImageView
         val intent = getIntent()
         val device:String = intent.getStringExtra("value").toString()
         deviceName.text =device
+        description.setText("Total active time of " +device + " "+"per room." )
 
         //If button Fan was pressed
         if (device == "Fan") {
             val toast = Toast.makeText(this, "View fans consumption",Toast.LENGTH_SHORT)
             toast.show()
+            description.setText("Total active time of fans per room." )
+
             deviceImage.setImageResource(R.drawable.img_fan)
             roomConsumption(device,"Living Room")
             roomConsumption(device,"Kitchen")
@@ -56,6 +59,8 @@ class DevicereportActivity : AppCompatActivity() {
         if (device == "Light") {
             val toast = Toast.makeText(this, "View lights consumption",Toast.LENGTH_LONG)
             toast.show()
+            description.setText("Total active time of lights per room." )
+
             deviceImage.setImageResource(R.drawable.img_light)
             roomConsumption(device,"Living Room")
             roomConsumption(device,"Kitchen")
@@ -67,6 +72,8 @@ class DevicereportActivity : AppCompatActivity() {
         if (device == "Air-Conditioners") {
             val toast = Toast.makeText(this, "View AC consumption",Toast.LENGTH_LONG)
             toast.show()
+            description.setText("Total active time of air-conditioners per room." )
+
             deviceImage.setImageResource(R.drawable.img_airconditioner)
             roomConsumption(device,"Living Room")
             roomConsumption(device,"Kitchen")
@@ -78,6 +85,8 @@ class DevicereportActivity : AppCompatActivity() {
         if (device == "Television") {
             val toast = Toast.makeText(this, "View TV consumption",Toast.LENGTH_LONG)
             toast.show()
+            description.setText("Total active time of televisions per room." )
+
             deviceImage.setImageResource(R.drawable.img_tv)
             roomConsumption(device,"Living Room")
             roomConsumption(device,"Kitchen")

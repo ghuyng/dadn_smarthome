@@ -94,7 +94,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/details"
                 app:layout_constraintHorizontal_bias="0.1"
-                android:text="Most used in:"/>
+                android:text="@string/description_home"/>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"

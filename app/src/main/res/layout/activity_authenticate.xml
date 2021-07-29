@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingTop="?attr/actionBarSize">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -29,7 +28,7 @@
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:textColor="#ffffff"
-            android:textColorHint="#C2511E"
+            android:textColorHint="#FDA43C"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -46,7 +45,7 @@
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:textColor="#ffffff"
-            android:textColorHint="#C2511E"
+            android:textColorHint="#FDA43C"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -75,13 +74,13 @@
             android:layout_width="140dp"
             android:layout_height="45dp"
             android:layout_marginBottom="84dp"
-            android:background="#F46F3F"
+            android:background="@drawable/rectangle"
             android:text="Sign In"
             android:textSize="21sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:backgroundTint="#F46F3F"/>
+            app:backgroundTint="#FDA43C"/>
 
         <EditText
             android:id="@+id/editTextTextPersonName2"
@@ -112,7 +111,7 @@
             android:layout_marginEnd="56dp"
             android:layout_marginBottom="16dp"
             android:text="Sign Up!"
-            android:textColor="#E9FF00"
+            android:textColor="#FDA43C"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -137,7 +136,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/sign_in_image" />
+            app:srcCompat="@drawable/image_auth" />
     </LinearLayout>
 
 

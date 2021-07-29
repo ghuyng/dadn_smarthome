@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import com.example.smarthome.databinding.ActivitySignUpBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -26,7 +27,7 @@ class SignUpActivity : AppCompatActivity() {
         auth = Firebase.auth
         setContentView(binding.root)
         val buttonSignUp: Button = findViewById(R.id.btnSignUp)
-        val buttonBack: Button = findViewById(R.id.btnBackToSignIn)
+        val buttonBack: ImageButton = findViewById(R.id.btnBackToSignIn)
         val user_name: EditText = findViewById(R.id.textNameSignUp)
         val user_email: EditText = findViewById(R.id.textEmailSignUp)
         val user_password: EditText = findViewById(R.id.textPasswordSignUp)

@@ -17,13 +17,23 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+        <ImageButton
+            android:id="@+id/btnBackToSignIn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintEnd_toStartOf="@+id/txtTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            app:srcCompat="@drawable/ic_backbtn" />
 
         <TextView
             android:id="@+id/txtTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="150px"
-            android:layout_marginTop="150px"
+            android:layout_marginTop="100px"
             android:layout_marginRight="150px"
             android:text="WELCOME TO"
             android:textColor="@color/white"
@@ -34,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="150px"
-            android:layout_marginTop="100px"
+            android:layout_marginTop="10px"
             android:layout_marginRight="150px"
             android:layout_marginBottom="150px"
             android:text="SMART HOME"
@@ -56,7 +66,7 @@
             android:padding="10dp"
             android:inputType="textPersonName"
             android:textColor="#ffffff"
-            android:textColorHint="#C2511E"
+            android:textColorHint="#99FDA43C"
             android:textSize="25dp" />
 
         <EditText
@@ -74,7 +84,7 @@
             android:padding="10dp"
             android:inputType="textEmailAddress"
             android:textColor="#ffffff"
-            android:textColorHint="#C2511E"
+            android:textColorHint="#9AFDA43C"
             android:textSize="25dp" />
 
         <EditText
@@ -91,7 +101,7 @@
             android:hint="Password"
             android:padding="10dp"
             android:textColor="#ffffff"
-            android:textColorHint="#C2511E"
+            android:textColorHint="#99FDA43C"
             android:ems="10"
             android:inputType="textPassword"
             android:textSize="25dp"/>
@@ -110,7 +120,7 @@
             android:hint="Confirm Password"
             android:padding="10dp"
             android:textColor="#ffffff"
-            android:textColorHint="#C2511E"
+            android:textColorHint="#99FDA43C"
             android:ems="10"
             android:inputType="textPassword"
             android:textSize="25dp"/>
@@ -124,19 +134,9 @@
             android:layout_marginBottom="25px"
             android:text="CREATE ACCOUNT"
             android:textSize="20dp"
-            android:textColor="@color/black"></Button>
-        <Button
-            android:id="@+id/btnBackToSignIn"
-            android:layout_width="500px"
-            android:layout_height="150px"
-            android:layout_gravity="center"
-            android:layout_marginTop="25dp"
-            android:layout_marginLeft="150px"
-            android:layout_marginRight="150px"
-            android:layout_marginBottom="25px"
-            android:text="BACK"
-            android:textSize="18dp"
-            android:textColor="@color/black"></Button>
+            android:textColor="@color/black"/>
+
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
