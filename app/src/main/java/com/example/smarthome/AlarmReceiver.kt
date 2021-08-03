@@ -4,6 +4,7 @@ import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -40,13 +41,15 @@ class AlarmReceiver : BroadcastReceiver() {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
 
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         Log.d("ALARM RECIEVER", device.room)
         i.putExtra("device", device)
         Log.d("ALARM", intent.action.toString())
-        val pendingIntent = PendingIntent.getActivity(context!!, 0, i, PendingIntent.FLAG_UPDATE_CURRENT)
+        val pendingIntent = PendingIntent.getActivity(context!!, 0, i, PendingIntent.FLAG_ONE_SHOT)
 
         val builder = NotificationCompat.Builder(context!!, "turnonoffnoti")
-            .setSmallIcon(R.drawable.ic_notifications_black_24dp)
+            .setSmallIcon(R.drawable.ic_stat_name)
+            .setLargeIcon(BitmapFactory.decodeResource(context.resources, R.drawable.ic_stat_name))
             .setContentTitle("Smart Home App")
             .setContentText("${device.name} has turned ${if (intent.action == "TURN_ON_DEVICE") "On" else "Off"}")
             .setAutoCancel(true)

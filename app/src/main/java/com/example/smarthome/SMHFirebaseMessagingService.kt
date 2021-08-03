@@ -6,6 +6,7 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.media.RingtoneManager
 import android.os.Build
 import android.util.Log
@@ -76,7 +77,8 @@ class SMHFirebaseMessagingService : FirebaseMessagingService(){
         val channelId = getString(R.string.default_notification_channel_id)
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
-            .setSmallIcon(R.drawable.ic_notifications_black_24dp)
+            .setSmallIcon(R.drawable.ic_stat_name)
+            .setLargeIcon(BitmapFactory.decodeResource(applicationContext.resources, R.drawable.ic_stat_name))
             .setContentTitle("SmartHome App")
             .setContentText(messageBody)
             .setAutoCancel(true)

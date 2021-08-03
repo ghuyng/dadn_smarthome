@@ -40,9 +40,9 @@ app.get('/user', (req, res) => {
 
 app.post('/turn-device', (req, res) =>{
   console.log(req.body)
-  clientMqtt.changeRelay(req.body)
+  message = clientMqtt.changeRelay(req.body)?"good":"bad"
   res.status(200).json({
-    message: "good"
+    message,
   })
 })
 
@@ -55,8 +55,8 @@ app.post('/set-registrationtoken', (req, res) => {
 })
 
 app.get('/stop-alert', (req, res) => {
-  clientMqtt.changeAlert(0)
+  message = clientMqtt.changeAlert(0)?"good":"bad"
   res.status(200).json({
-    message: "good"
+    message,
   })
 })

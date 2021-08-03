@@ -26,6 +26,7 @@ var doorStatusRef = admin.database().ref(`Room/${defaultDoor.room}/${defaultDoor
 doorStatusRef.on('value', (snapshot) => {
   const data = snapshot.val();
   defaultDoor.status = data.Status
+  console.log(defaultDoor.status)
 });
 
 module.exports = {

@@ -18,8 +18,13 @@ class ViewNotificationsActivity : AppCompatActivity() {
         val apiController = APIController(this)
         apiController.jsonObjectGET("/stop-alert") { res ->
             Log.d("POST stop-alert", res.toString())
-            Toast.makeText(this, "Alarm stopped", Toast.LENGTH_SHORT).show()
-            finish()
+            if (res?.get("message") != "good") {
+                Toast.makeText(this, "Something went wrong. Please retry again sometime", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                Toast.makeText(this, "Alarm stopped", Toast.LENGTH_SHORT).show()
+                finish()
+            }
         }
     }
 
