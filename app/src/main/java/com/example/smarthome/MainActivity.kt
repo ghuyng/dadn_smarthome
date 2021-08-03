@@ -26,8 +26,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mSocket: Socket
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
+        (this as AppCompatActivity).supportActionBar!!.hide()
+
         val currentUser = Firebase.auth.currentUser
         if (currentUser == null) {
             val intent = Intent(this, SignInActivity::class.java)
